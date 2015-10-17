@@ -5,9 +5,10 @@
     <string name="rzeczowniki">Rzeczowniki</string>
     <string name="czasowniki">Czasowniki</string>
     <string name="mode">Tryb:</string>
-
-    <string name="automatic">automatyczny</string>
+    <string name="automatic">auto</string>
     <string name="therapist">terapeuty</string>
+    <string name="displayCount">Ilosc wyswietlanych obrazków:</string>
+    <string name="responseTime">Czas na odpowiedź użytkownika: </string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_general_settings">GeneralSettingsActivity</string>
 </resources>
