@@ -20,8 +20,8 @@
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/appBtn"
-        android:src="@drawable/general_button"
+        android:id="@+id/resBtn"
+        android:src="@drawable/res_button"
         android:layout_gravity="center_horizontal"
         android:background="@null"
         android:padding="16sp" />
@@ -29,8 +29,8 @@
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/storageBtn"
-        android:src="@drawable/general_button"
+        android:id="@+id/appBtn"
+        android:src="@drawable/app_button"
         android:layout_gravity="center_horizontal"
         android:background="@null"
         android:padding="16sp" />
