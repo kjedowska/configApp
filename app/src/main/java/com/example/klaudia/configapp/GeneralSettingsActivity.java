@@ -2,15 +2,51 @@ package com.example.klaudia.configapp;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Xml;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 public class GeneralSettingsActivity extends AppCompatActivity {
+
+    private XmlHandler xmlHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_general_settings);
+
+        setRadioGroupListeners();
+        xmlHandler = new XmlHandler(new Configuration("noun"), new Configuration("verb"), "config_app.xml");
+    }
+
+    private void setRadioGroupListeners() {
+        RadioGroup verbGroup = (RadioGroup)findViewById(R.id.RadioGroupCzasownikiMode);
+        // This overrides the radiogroup onCheckListener
+        verbGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            public void onCheckedChanged(RadioGroup rGroup, int checkedId) {
+                RadioButton checkedRadioButton = (RadioButton) rGroup.findViewById(checkedId);
+                boolean isChecked = checkedRadioButton.isChecked();
+                if (isChecked) {
+                    if (checkedRadioButton.getText()=="@string/therapist") xmlHandler.verbConfig.setMode("therapist");
+                    else xmlHandler.nounConfig.setMode("auto");
+                }
+            }
+        });
+
+        RadioGroup nounGroup = (RadioGroup)findViewById(R.id.RadioGroupRzeczownikiMode);
+        // This overrides the radiogroup onCheckListener
+        nounGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            public void onCheckedChanged(RadioGroup rGroup, int checkedId) {
+                RadioButton checkedRadioButton = (RadioButton) rGroup.findViewById(checkedId);
+                boolean isChecked = checkedRadioButton.isChecked();
+                if (isChecked) {
+                    if (checkedRadioButton.getText()=="@string/therapist") xmlHandler.nounConfig.setMode("therapist");
+                    else xmlHandler.nounConfig.setMode("auto");
+                }
+            }
+        });
     }
 
     @Override

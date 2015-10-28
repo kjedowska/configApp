@@ -31,7 +31,8 @@
             android:layout_height="wrap_content"
             android:layout_span="2"
             android:layout_column="1"
-            android:checkedButton="@+id/auto">
+            android:checkedButton="@+id/auto"
+            android:nestedScrollingEnabled="false">
             <RadioButton
                 android:id="@+id/autoR"
                 android:layout_width="wrap_content"
