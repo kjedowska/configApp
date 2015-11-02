@@ -1,14 +1,20 @@
 package com.example.klaudia.configapp;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Xml;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
+import android.widget.TextView;
 
-public class GeneralSettingsActivity extends AppCompatActivity {
+public class GeneralSettingsActivity extends AppCompatActivity implements View.OnClickListener {
 
     private XmlHandler xmlHandler;
 
@@ -16,58 +22,52 @@ public class GeneralSettingsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_general_settings);
+        String filePath = getFilesDir().getPath().toString() + "/config_app.xml";
+        xmlHandler = new XmlHandler(new Configuration("noun"), new Configuration("verb"), filePath);
 
-        setRadioGroupListeners();
-        xmlHandler = new XmlHandler(new Configuration("noun"), new Configuration("verb"), "config_app.xml");
+        fillSpinner(findViewById(R.id.nounHintType));
+        fillSpinner(findViewById(R.id.verbHintType));
+        View saveSettingsBtn = findViewById(R.id.saveBtn);
+        saveSettingsBtn.setOnClickListener(this);
     }
 
-    private void setRadioGroupListeners() {
-        RadioGroup verbGroup = (RadioGroup)findViewById(R.id.RadioGroupCzasownikiMode);
-        // This overrides the radiogroup onCheckListener
-        verbGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            public void onCheckedChanged(RadioGroup rGroup, int checkedId) {
-                RadioButton checkedRadioButton = (RadioButton) rGroup.findViewById(checkedId);
-                boolean isChecked = checkedRadioButton.isChecked();
-                if (isChecked) {
-                    if (checkedRadioButton.getText()=="@string/therapist") xmlHandler.verbConfig.setMode("therapist");
-                    else xmlHandler.nounConfig.setMode("auto");
-                }
-            }
-        });
+    private void fillSpinner(View view) {
+        Spinner spinner = (Spinner) view;
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.hint_array, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+    }
 
-        RadioGroup nounGroup = (RadioGroup)findViewById(R.id.RadioGroupRzeczownikiMode);
-        // This overrides the radiogroup onCheckListener
-        nounGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            public void onCheckedChanged(RadioGroup rGroup, int checkedId) {
-                RadioButton checkedRadioButton = (RadioButton) rGroup.findViewById(checkedId);
-                boolean isChecked = checkedRadioButton.isChecked();
-                if (isChecked) {
-                    if (checkedRadioButton.getText()=="@string/therapist") xmlHandler.nounConfig.setMode("therapist");
-                    else xmlHandler.nounConfig.setMode("auto");
-                }
-            }
-        });
+    private String getRadioGroupCheckedVal(View group) {
+        RadioGroup rGroup = (RadioGroup)group;
+        RadioButton checkedRadioButton = (RadioButton) rGroup.findViewById(rGroup.getCheckedRadioButtonId());
+        if (checkedRadioButton.getText()=="@string/therapist")
+           return "therapist";
+        else return "auto";
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_general_settings, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.saveBtn:
+                updateConfig();
+                xmlHandler.serialize();
         }
-
-        return super.onOptionsItemSelected(item);
     }
+
+    public void updateConfig() {
+        EditText nounDisplayCount = (EditText)findViewById(R.id.nounDisplayCount);
+        EditText verbDisplayCount = (EditText)findViewById(R.id.verbDisplayCount);
+        EditText nounResponseTime = (EditText)findViewById(R.id.nounResponseTime);
+        EditText verbResponseTime = (EditText)findViewById(R.id.verbResponseTime);
+
+        xmlHandler.nounConfig.setDisplayCount(Integer.parseInt(nounDisplayCount.getText().toString()));
+        xmlHandler.nounConfig.setResponseTime(Integer.parseInt(nounResponseTime.getText().toString()));
+        xmlHandler.verbConfig.setDisplayCount(Integer.parseInt(verbDisplayCount.getText().toString()));
+        xmlHandler.verbConfig.setResponseTime(Integer.parseInt(verbResponseTime.getText().toString()));
+        xmlHandler.nounConfig.setMode(getRadioGroupCheckedVal(findViewById(R.id.RadioGroupNounMode)));
+        xmlHandler.verbConfig.setMode(getRadioGroupCheckedVal(findViewById(R.id.RadioGroupVerbMode)));
+    }
+
 }

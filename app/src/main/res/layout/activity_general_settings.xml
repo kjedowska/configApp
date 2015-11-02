@@ -7,7 +7,7 @@
     android:stretchColumns="*"
     android:background="#d8d2bc"
     tools:context="com.example.klaudia.configapp.GeneralSettingsActivity">
-    <TableRow android:layout_marginBottom="4dp">
+    <TableRow android:layout_marginBottom="14dp">
         <TextView android:text="@string/rzeczowniki"
             android:layout_column="1"
             android:layout_width="wrap_content"
@@ -19,19 +19,19 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/abc_text_size_large_material" />
     </TableRow>
-    <TableRow>
+    <TableRow android:layout_marginBottom="10dp">
         <TextView android:text="@string/mode"
             android:layout_column="0"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <RadioGroup
-            android:id="@+id/RadioGroupRzeczownikiMode"
+            android:id="@+id/RadioGroupNounMode"
             android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_span="2"
             android:layout_column="1"
-            android:checkedButton="@+id/auto"
+            android:checkedButton="@+id/autoR"
             android:nestedScrollingEnabled="false">
             <RadioButton
                 android:id="@+id/autoR"
@@ -44,13 +44,13 @@
                 android:text="@string/therapist"/>
         </RadioGroup>
         <RadioGroup
-            android:id="@+id/RadioGroupCzasownikiMode"
+            android:id="@+id/RadioGroupVerbMode"
             android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_column="3"
             android:layout_span="2"
-            android:checkedButton="@+id/auto">
+            android:checkedButton="@+id/autoC">
             <RadioButton
                 android:id="@+id/autoC"
                 android:layout_width="wrap_content"
@@ -62,15 +62,29 @@
                 android:text="@string/therapist"/>
         </RadioGroup>
     </TableRow>
+    <TableRow android:layout_marginBottom="10dp">
+        <TextView android:text="@string/hintType"
+            android:layout_column="0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <Spinner
+            android:id="@+id/nounHintType"
+            android:layout_column="1"
+            android:layout_width="fill_parent"/>
+        <Spinner
+            android:id="@+id/verbHintType"
+            android:layout_column="3"
+            android:layout_width="fill_parent"/>
+    </TableRow>
     <TableRow>
         <TextView android:text="@string/displayCount"
             android:layout_column="0"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
-        <EditText android:id="@+id/rzeczownikiDisplayCount"
+        <EditText android:id="@+id/nounDisplayCount"
             android:layout_column="1"
             android:numeric="decimal" />
-        <EditText android:id="@+id/czasownikiDisplayCount"
+        <EditText android:id="@+id/verbDisplayCount"
             android:layout_column="3"
             android:numeric="decimal"/>
     </TableRow>
@@ -79,11 +93,15 @@
             android:layout_column="0"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
-        <EditText android:id="@+id/rzeczownikiResponseTime"
+        <EditText android:id="@+id/nounResponseTime"
             android:layout_column="1"
             android:numeric="decimal" />
-        <EditText android:id="@+id/czasownikiResponseTime"
+        <EditText android:id="@+id/verbResponseTime"
             android:layout_column="3"
             android:numeric="decimal"/>
+    </TableRow>
+    <TableRow>
+        <Button android:id="@+id/saveBtn"
+            android:text="@string/save"/>
     </TableRow>
 </TableLayout>

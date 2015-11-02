@@ -5,10 +5,17 @@
     <string name="rzeczowniki">Rzeczowniki</string>
     <string name="czasowniki">Czasowniki</string>
     <string name="mode">Tryb:</string>
+    <string name="save">Zapisz</string>
     <string name="automatic">auto</string>
     <string name="therapist">terapeuty</string>
     <string name="displayCount">Ilosc wyswietlanych obrazków:</string>
     <string name="responseTime">Czas na odpowiedź użytkownika: </string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_general_settings">GeneralSettingsActivity</string>
+    <string name="hintType">Typ podpowiedzi:</string>
+    <string-array name="hint_array">
+        <item>brak</item>
+        <item>wygaszanie</item>
+        <item>pogrubienie</item>
+    </string-array>
 </resources>
