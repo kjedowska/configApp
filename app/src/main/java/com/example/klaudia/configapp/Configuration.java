@@ -10,6 +10,7 @@ public class Configuration {
     private int displayCount = 3;
     private String mode = "";
     private int responseTime = 5;
+    private String hintType = "";
     public String type = "";
 
     Configuration() {}
@@ -38,6 +39,14 @@ public class Configuration {
 
     public void setResponseTime(int responseTime) {
         this.responseTime = responseTime;
+    }
+
+    public String getHintType() {
+        return hintType;
+    }
+
+    public void setHintType(String hintType) {
+        this.hintType = hintType;
     }
 
 }

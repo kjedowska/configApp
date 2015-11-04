@@ -4,6 +4,9 @@ import android.content.Context;
 import android.util.Log;
 import android.util.Xml;
 
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+import org.xmlpull.v1.XmlPullParserFactory;
 import org.xmlpull.v1.XmlSerializer;
 
 import java.io.File;
@@ -12,6 +15,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringWriter;
+import java.net.URL;
 
 /**
  * Created by Klaudia on 2015-10-27.
@@ -51,6 +55,14 @@ public class XmlHandler {
         this.verbConfig = verbConfig;
     }
 
+    public Configuration getConfiguration(String forr){
+        if ("noun".equals(forr))
+            return nounConfig;
+        else if ("verb".equals(forr))
+            return verbConfig;
+        return new Configuration();
+    }
+
     public void serialize(){
         try {
             File newxmlfile = new File(path);
@@ -65,7 +77,7 @@ public class XmlHandler {
             xmlSerializer.startTag(null, "configs");
             xmlSerializer.startTag(null, "configuration");
             xmlSerializer.startTag(null, "mode");
-            xmlSerializer.text(nounConfig.getMode());
+            xmlSerializer.text(String.valueOf(nounConfig.getMode()));
             xmlSerializer.endTag(null, "mode");
             xmlSerializer.startTag(null,"displayCount");
             xmlSerializer.text(String.valueOf(nounConfig.getDisplayCount()));
@@ -73,11 +85,14 @@ public class XmlHandler {
             xmlSerializer.startTag(null, "responseTime");
             xmlSerializer.text(String.valueOf(nounConfig.getResponseTime()));
             xmlSerializer.endTag(null, "responseTime");
+            xmlSerializer.startTag(null, "hintType");
+            xmlSerializer.text(String.valueOf(nounConfig.getHintType()));
+            xmlSerializer.endTag(null, "hintType");
             xmlSerializer.endTag(null, "configuration");
 
             xmlSerializer.startTag(null, "configuration");
             xmlSerializer.startTag(null, "mode");
-            xmlSerializer.text(verbConfig.getMode());
+            xmlSerializer.text(String.valueOf(verbConfig.getMode()));
             xmlSerializer.endTag(null, "mode");
             xmlSerializer.startTag(null,"displayCount");
             xmlSerializer.text(String.valueOf(verbConfig.getDisplayCount()));
@@ -85,6 +100,9 @@ public class XmlHandler {
             xmlSerializer.startTag(null, "responseTime");
             xmlSerializer.text(String.valueOf(verbConfig.getResponseTime()));
             xmlSerializer.endTag(null, "responseTime");
+            xmlSerializer.startTag(null, "hintType");
+            xmlSerializer.text(String.valueOf(verbConfig.getHintType()));
+            xmlSerializer.endTag(null, "hintType");
             xmlSerializer.endTag(null, "configuration");
             xmlSerializer.endTag(null, "configs");
             xmlSerializer.endDocument();
@@ -98,7 +116,38 @@ public class XmlHandler {
         }
     }
 
-    public void parse() {
-        //InputStream is = getResources().openRawResource(R.raw.test);
+    public void parse() throws IOException, XmlPullParserException {
+        XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
+        factory.setNamespaceAware(true);
+        XmlPullParser xpp = factory.newPullParser();
+
+        URL input = new URL(path);
+        xpp.setInput(input.openStream(), null);
+
+        int eventType = xpp.getEventType();
+        String currentTag = null;
+        String forr = null;
+        while (eventType != XmlPullParser.END_DOCUMENT) {
+            if (eventType == XmlPullParser.START_TAG) {
+                currentTag = xpp.getName();
+            } else if (eventType == XmlPullParser.TEXT) {
+                if ("configuration".equals(currentTag)){
+                    forr = xpp.getAttributeValue(null, "for");
+                }
+                if ("mode".equals(currentTag)){
+                    getConfiguration(forr).setMode(xpp.getText());
+                }
+                if ("displayCount".equals(currentTag)){
+                    getConfiguration(forr).setDisplayCount(Integer.parseInt(xpp.getText()));
+                }
+                if ("responseTime".equals(currentTag)){
+                    getConfiguration(forr).setResponseTime(Integer.parseInt(xpp.getText()));
+                }
+                if ("hintType".equals(currentTag)){
+                    getConfiguration(forr).setHintType(xpp.getText());
+                }
+            }
+            eventType = xpp.next();
+        }
     }
 }

@@ -39,6 +39,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/automatic"/>
             <RadioButton
+                android:id="@+id/therapistR"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/therapist"/>
@@ -57,6 +58,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/automatic"/>
             <RadioButton
+                android:id="@+id/therapistC"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/therapist"/>
