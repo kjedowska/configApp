@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">ConfigApp</string>
 
+    <string name="any">any</string>
+
     <string name="hello_world">Hello world!</string>
     <string name="rzeczowniki">Rzeczowniki</string>
     <string name="czasowniki">Czasowniki</string>
