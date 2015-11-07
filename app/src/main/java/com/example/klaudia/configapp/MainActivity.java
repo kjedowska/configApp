@@ -14,8 +14,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         View generalSettingsBtn = findViewById(R.id.generalBtn);
+        View resBtn = findViewById(R.id.resBtn);
+
         generalSettingsBtn.setOnClickListener(this);
+        resBtn.setOnClickListener(this);
     }
 
 
@@ -24,6 +28,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.generalBtn:
                 onGeneralSettingsSelected();
+            case R.id.resBtn:
+                onResBtnSelected();
         }
     }
 
@@ -33,4 +39,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return true;
     }
 
+    public boolean onResBtnSelected() {
+        Intent intent = new Intent(this, ResourcesActivity.class);
+        startActivity(intent);
+        return true;
+    }
 }

@@ -39,4 +39,5 @@
         <item>1:2</item>
         <item>0:1</item>
     </string-array>
+    <string name="title_activity_resources">ResourcesActivity</string>
 </resources>
