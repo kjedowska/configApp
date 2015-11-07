@@ -1,6 +1,7 @@
 package com.example.klaudia.configapp;
 
 import android.content.Intent;
+import android.support.annotation.ArrayRes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Xml;
@@ -48,18 +49,24 @@ public class GeneralSettingsActivity extends AppCompatActivity implements View.O
 
         storage.read();
 
-        fillSpinner(findViewById(R.id.nounHintType));
-        fillSpinner(findViewById(R.id.verbHintType));
+        fillSpinner(findViewById(R.id.nounHintType), R.array.hint_array);
+        fillSpinner(findViewById(R.id.verbHintType), R.array.hint_array);
+        fillSpinner(findViewById(R.id.nounDisplayCount), R.array.display_array);
+        fillSpinner(findViewById(R.id.verbDisplayCount), R.array.display_array);
+        fillSpinner(findViewById(R.id.nounLevel), R.array.level_array);
+        fillSpinner(findViewById(R.id.verbLevel), R.array.level_array);
+        fillSpinner(findViewById(R.id.nounProportions), R.array.proportions_array);
+        fillSpinner(findViewById(R.id.verbProportions), R.array.proportions_array);
         View saveSettingsBtn = findViewById(R.id.saveBtn);
         saveSettingsBtn.setOnClickListener(this);
 
         updateGUI();
     }
 
-    private void fillSpinner(View view) {
+    private void fillSpinner(View view, @ArrayRes int arr) {
         Spinner spinner = (Spinner) view;
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.hint_array, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, arr,
+                android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
     }
@@ -67,7 +74,7 @@ public class GeneralSettingsActivity extends AppCompatActivity implements View.O
     private String getRadioGroupCheckedVal(View group) {
         RadioGroup rGroup = (RadioGroup)group;
         RadioButton checkedRadioButton = (RadioButton) rGroup.findViewById(rGroup.getCheckedRadioButtonId());
-        if (checkedRadioButton.getText()=="terapeuty")
+        if ("terapeuty".equals(checkedRadioButton.getText().toString()))
            return "therapist";
         else return "auto";
     }
@@ -83,12 +90,16 @@ public class GeneralSettingsActivity extends AppCompatActivity implements View.O
     }
 
     public void updateConfig() {
-        EditText nounDisplayCount = (EditText)findViewById(R.id.nounDisplayCount);
-        EditText verbDisplayCount = (EditText)findViewById(R.id.verbDisplayCount);
+        Spinner nounDisplayCount = (Spinner)findViewById(R.id.nounDisplayCount);
+        Spinner verbDisplayCount = (Spinner)findViewById(R.id.verbDisplayCount);
         EditText nounResponseTime = (EditText)findViewById(R.id.nounResponseTime);
         EditText verbResponseTime = (EditText)findViewById(R.id.verbResponseTime);
         Spinner nounHintType = (Spinner)findViewById(R.id.nounHintType);
         Spinner verbHintType = (Spinner)findViewById(R.id.verbHintType);
+        Spinner nounLevel = (Spinner)findViewById(R.id.nounLevel);
+        Spinner verbLevel = (Spinner)findViewById(R.id.verbLevel);
+        Spinner nounProportions = (Spinner)findViewById(R.id.nounProportions);
+        Spinner verbProportions = (Spinner)findViewById(R.id.verbProportions);
 
 //        xmlHandler.nounConfig.setDisplayCount(Integer.parseInt(nounDisplayCount.getText().toString()));
 //        xmlHandler.verbConfig.setDisplayCount(Integer.parseInt(verbDisplayCount.getText().toString()));
@@ -102,8 +113,8 @@ public class GeneralSettingsActivity extends AppCompatActivity implements View.O
 //        xmlHandler.nounConfig.setHintType(mapper.getHint(nounHintType.getSelectedItem().toString()));
 //        xmlHandler.verbConfig.setHintType(mapper.getHint(verbHintType.getSelectedItem().toString()));
 
-        nounConfig.setDisplayCount(Integer.parseInt(nounDisplayCount.getText().toString()));
-        verbConfig.setDisplayCount(Integer.parseInt(verbDisplayCount.getText().toString()));
+        nounConfig.setDisplayCount(Integer.parseInt(nounDisplayCount.getSelectedItem().toString()));
+        verbConfig.setDisplayCount(Integer.parseInt(verbDisplayCount.getSelectedItem().toString()));
 
         nounConfig.setResponseTime(Integer.parseInt(nounResponseTime.getText().toString()));
         verbConfig.setResponseTime(Integer.parseInt(verbResponseTime.getText().toString()));
@@ -113,17 +124,27 @@ public class GeneralSettingsActivity extends AppCompatActivity implements View.O
 
         nounConfig.setHintType(mapper.getHint(nounHintType.getSelectedItem().toString()));
         verbConfig.setHintType(mapper.getHint(verbHintType.getSelectedItem().toString()));
+
+        nounConfig.setLevel(nounLevel.getSelectedItem().toString());
+        verbConfig.setLevel(verbLevel.getSelectedItem().toString());
+
+        nounConfig.setProportions(nounProportions.getSelectedItem().toString());
+        verbConfig.setProportions(verbProportions.getSelectedItem().toString());
     }
 
     private void updateGUI() {
-        EditText nounDisplayCount = (EditText)findViewById(R.id.nounDisplayCount);
-        EditText verbDisplayCount = (EditText)findViewById(R.id.verbDisplayCount);
+        Spinner nounDisplayCount = (Spinner)findViewById(R.id.nounDisplayCount);
+        Spinner verbDisplayCount = (Spinner)findViewById(R.id.verbDisplayCount);
         EditText nounResponseTime = (EditText)findViewById(R.id.nounResponseTime);
         EditText verbResponseTime = (EditText)findViewById(R.id.verbResponseTime);
         RadioGroup nounRg = (RadioGroup)findViewById(R.id.RadioGroupNounMode);
         RadioGroup verbRg = (RadioGroup)findViewById(R.id.RadioGroupVerbMode);
         Spinner nounHintType = (Spinner)findViewById(R.id.nounHintType);
         Spinner verbHintType = (Spinner)findViewById(R.id.verbHintType);
+        Spinner nounLevel = (Spinner)findViewById(R.id.nounLevel);
+        Spinner verbLevel = (Spinner)findViewById(R.id.verbLevel);
+        Spinner nounProportions = (Spinner)findViewById(R.id.nounProportions);
+        Spinner verbProportions = (Spinner)findViewById(R.id.verbProportions);
 
 //        nounDisplayCount.setText("" + xmlHandler.nounConfig.getDisplayCount());
 //        verbDisplayCount.setText("" + xmlHandler.verbConfig.getDisplayCount());
@@ -143,8 +164,8 @@ public class GeneralSettingsActivity extends AppCompatActivity implements View.O
 //        nounHintType.setSelection(mapper.getHintId(xmlHandler.nounConfig.getHintType()));
 //        verbHintType.setSelection(mapper.getHintId(xmlHandler.verbConfig.getHintType()));
 
-        nounDisplayCount.setText("" + nounConfig.getDisplayCount());
-        verbDisplayCount.setText("" + verbConfig.getDisplayCount());
+        nounDisplayCount.setSelection(mapper.getDisplayId(nounConfig.getDisplayCount()));
+        verbDisplayCount.setSelection(mapper.getDisplayId(verbConfig.getDisplayCount()));
         nounResponseTime.setText("" + nounConfig.getResponseTime());
         verbResponseTime.setText("" + verbConfig.getResponseTime());
 
@@ -160,6 +181,12 @@ public class GeneralSettingsActivity extends AppCompatActivity implements View.O
 
         nounHintType.setSelection(mapper.getHintId(nounConfig.getHintType()));
         verbHintType.setSelection(mapper.getHintId(verbConfig.getHintType()));
+
+        nounLevel.setSelection(mapper.getLevelId(nounConfig.getLevel()));
+        verbLevel.setSelection(mapper.getLevelId(verbConfig.getLevel()));
+
+        nounProportions.setSelection(mapper.getProportionsId(nounConfig.getProportions()));
+        verbProportions.setSelection(mapper.getProportionsId(verbConfig.getProportions()));
 
     }
 }

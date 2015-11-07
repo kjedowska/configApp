@@ -83,12 +83,36 @@
             android:layout_column="0"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
-        <EditText android:id="@+id/nounDisplayCount"
+        <Spinner android:id="@+id/nounDisplayCount"
             android:layout_column="1"
-            android:numeric="decimal" />
-        <EditText android:id="@+id/verbDisplayCount"
+            android:layout_width="fill_parent" />
+        <Spinner android:id="@+id/verbDisplayCount"
             android:layout_column="3"
-            android:numeric="decimal"/>
+            android:layout_width="fill_parent"/>
+    </TableRow>
+    <TableRow>
+        <TextView android:text="@string/level"
+            android:layout_column="0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <Spinner android:id="@+id/nounLevel"
+            android:layout_column="1"
+            android:layout_width="fill_parent" />
+        <Spinner android:id="@+id/verbLevel"
+            android:layout_column="3"
+            android:layout_width="fill_parent"/>
+    </TableRow>
+    <TableRow>
+        <TextView android:text="@string/proportions"
+            android:layout_column="0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <Spinner android:id="@+id/nounProportions"
+            android:layout_column="1"
+            android:layout_width="fill_parent" />
+        <Spinner android:id="@+id/verbProportions"
+            android:layout_column="3"
+            android:layout_width="fill_parent"/>
     </TableRow>
     <TableRow>
         <TextView android:text="@string/responseTime"

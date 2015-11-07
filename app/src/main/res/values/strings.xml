@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">ConfigApp</string>
-
     <string name="any">any</string>
 
     <string name="hello_world">Hello world!</string>
@@ -8,6 +7,8 @@
     <string name="czasowniki">Czasowniki</string>
     <string name="mode">Tryb:</string>
     <string name="save">Zapisz</string>
+    <string name="level">Stopniowanie: </string>
+    <string name="proportions">Proporcje obraz/tekst: </string>
     <string name="automatic">auto</string>
     <string name="therapist">terapeuty</string>
     <string name="displayCount">Ilosc wyswietlanych obrazków:</string>
@@ -19,5 +20,23 @@
         <item>brak</item>
         <item>wygaszanie</item>
         <item>pogrubienie</item>
+    </string-array>
+    <string-array name="level_array">
+        <item>poziom1</item>
+        <item>poziom2</item>
+        <item>poziom3</item>
+    </string-array>
+    <string-array name="display_array">
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>6</item>
+    </string-array>
+    <string-array name="proportions_array">
+        <item>1:0</item>
+        <item>2:1</item>
+        <item>1:1</item>
+        <item>1:2</item>
+        <item>0:1</item>
     </string-array>
 </resources>

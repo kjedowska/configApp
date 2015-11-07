@@ -11,6 +11,8 @@ public class Configuration {
     private String mode = "";
     private int responseTime = 5;
     private String hintType = "";
+    private String level = "poziom1";
+    private String proportions = "1:0";
     public String type = "";
 
     Configuration() {}
@@ -49,4 +51,19 @@ public class Configuration {
         this.hintType = hintType;
     }
 
+    public String getLevel() {
+        return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
+    }
+
+    public String getProportions() {
+        return proportions;
+    }
+
+    public void setProportions(String proportions) {
+        this.proportions = proportions;
+    }
 }
