@@ -28,8 +28,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.generalBtn:
                 onGeneralSettingsSelected();
+                break;
             case R.id.resBtn:
                 onResBtnSelected();
+                break;
         }
     }
 
