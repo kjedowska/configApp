@@ -40,4 +40,7 @@
         <item>0:1</item>
     </string-array>
     <string name="title_activity_resources">ResourcesActivity</string>
+    <string name="title_activity_add_category">AddCategory</string>
+    <string name="add_category">Dodaj kategorię</string>
+    <string name="add_audio">Dodaj audio</string>
 </resources>

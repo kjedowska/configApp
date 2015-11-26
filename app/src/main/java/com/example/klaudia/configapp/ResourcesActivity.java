@@ -1,31 +1,19 @@
 package com.example.klaudia.configapp;
 
 import android.app.Activity;
-import android.app.ExpandableListActivity;
-import android.content.Context;
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.Menu;
+import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ExpandableListView;
-import android.widget.LinearLayout;
-import android.widget.ScrollView;
-import android.widget.TextView;
-import android.view.ContextMenu;
-import android.view.View;
-import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.Toast;
-
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class ResourcesActivity extends Activity {
+public class ResourcesActivity extends Activity implements View.OnClickListener  {
 
     ExpandableListAdapter listAdapter;
     ExpandableListView expListView;
@@ -43,7 +31,6 @@ public class ResourcesActivity extends Activity {
         // get the listview
         expListView = (ExpandableListView) findViewById(R.id.list1);
 
-
         initDB();
 
         listAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild);
@@ -51,6 +38,9 @@ public class ResourcesActivity extends Activity {
         // setting list adapter
         expListView.setAdapter(listAdapter);
         registerForContextMenu(expListView);
+
+        View addBtn = findViewById(R.id.addBtn);
+        addBtn.setOnClickListener(this);
     }
 
     void initDB() {
@@ -60,7 +50,6 @@ public class ResourcesActivity extends Activity {
         DBAdapter db = new DBAdapter(getApplicationContext());
         db.openDB();
         nCategories = db.getCategoriesFromType("rzeczowniki");
-        //vCategories = db.getCategoriesFromType("czasowniki");
 
         for (Category c: nCategories) {
             listDataHeader.add(c.getName());
@@ -85,27 +74,67 @@ public class ResourcesActivity extends Activity {
                  ExpandableListView.getPackedPositionGroup(info.packedPosition);
          int child =
                  ExpandableListView.getPackedPositionChild(info.packedPosition);
-//Only create a context menu for child items
+         String group_name = listDataHeader.get(group);
 
-             menu.setHeaderTitle("11");
-             menu.add(0, 1, 0, "Read page");
-             menu.add(0, 1, 0, "Edit page");
-
-
+         if (type == 1) {
+             String child_name = listDataChild.get(group_name).get(child);
+             menu.setHeaderTitle(child_name);
+             menu.add(0, 0, 0, "Edit");
+             menu.add(0, 1, 0, "Delete");
          }
+         else {
+             menu.setHeaderTitle(group_name);
+             menu.add(0, 0, 0, "Edit");
+             menu.add(0, 1, 0, "Delete");
+         }
+    }
 
     @Override
-    public boolean onContextItemSelected(MenuItem item) {
-        if(item.getTitle()=="Action 1"){function1(item.getItemId());}
-        else if(item.getTitle()=="Action 2"){function2(item.getItemId());}
-        else {return false;}
-        return true;
+    public boolean onContextItemSelected(MenuItem menuItem) {
+        ExpandableListView.ExpandableListContextMenuInfo info =
+                (ExpandableListView.ExpandableListContextMenuInfo) menuItem.getMenuInfo();
+        int type =
+                ExpandableListView.getPackedPositionType(info.packedPosition);
+        int group =
+                ExpandableListView.getPackedPositionGroup(info.packedPosition);
+        int child =
+                ExpandableListView.getPackedPositionChild(info.packedPosition);
+        String group_name = listDataHeader.get(group);
+
+        if (type == 1) {
+            String child_name = listDataChild.get(group_name).get(child);
+            if(menuItem.getTitle()=="Edit"){function1(child_name + "edit");}
+            else if(menuItem.getTitle()=="Delete"){function2(child_name + "del");}
+            else {return false;}
+            return true;
+        }
+        else {
+            if(menuItem.getTitle()=="Edit"){function1(group_name + " edit");}
+            else if(menuItem.getTitle()=="Delete"){function2(group_name + " del");}
+            else {return false;}
+            return true;
+        }
     }
 
-    public void function1(int id){
-        Toast.makeText(this, "function 1 called", Toast.LENGTH_SHORT).show();
+    public void function1(String id){
+
+        Toast.makeText(this, "function 1 called "+id, Toast.LENGTH_SHORT).show();
     }
-    public void function2(int id){
-        Toast.makeText(this, "function 2 called", Toast.LENGTH_SHORT).show();
+    public void function2(String id){
+        Toast.makeText(this, "function 2 called "+id, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.addBtn:
+                onAddBtnSelected();
+        }
+    }
+
+    public boolean onAddBtnSelected() {
+        Intent intent = new Intent(this, AddCategory.class);
+        startActivity(intent);
+        return true;
     }
 }
