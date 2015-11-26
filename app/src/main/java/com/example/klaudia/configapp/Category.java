@@ -8,7 +8,7 @@ import java.util.Set;
  */
 public class Category {
     private String name = "";
-    private String type = "";
+    private String status = "";
     private String audio1 = "";
     private String audio2 = "";
     private List<Node> nodes;
@@ -37,12 +37,12 @@ public class Category {
         this.name = name;
     }
 
-    public String getType() {
-        return type;
+    public String getStatus() {
+        return status;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public List<Node> getNodes() {

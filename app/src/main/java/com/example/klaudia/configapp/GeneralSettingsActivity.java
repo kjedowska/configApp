@@ -34,18 +34,7 @@ public class GeneralSettingsActivity extends AppCompatActivity implements View.O
         setContentView(R.layout.activity_general_settings);
 
         nounConfig = new Configuration("noun");
-        verbConfig = new Configuration("verb");
-        // String filePath = getFilesDir().getPath().toString() + "/config_app.xml";
-        // xmlHandler = new XmlHandler(nounConfig, verbConfig, filePath);
         storage = new Storage(this, nounConfig, verbConfig);
-
-//        try {
-//            xmlHandler.parse();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        } catch (XmlPullParserException e) {
-//            e.printStackTrace();
-//        }
 
         storage.read();
 
@@ -84,7 +73,6 @@ public class GeneralSettingsActivity extends AppCompatActivity implements View.O
         switch (v.getId()) {
             case R.id.saveBtn:
                 updateConfig();
-                //xmlHandler.serialize();
                 storage.save();
         }
     }
@@ -101,17 +89,6 @@ public class GeneralSettingsActivity extends AppCompatActivity implements View.O
         Spinner nounProportions = (Spinner)findViewById(R.id.nounProportions);
         Spinner verbProportions = (Spinner)findViewById(R.id.verbProportions);
 
-//        xmlHandler.nounConfig.setDisplayCount(Integer.parseInt(nounDisplayCount.getText().toString()));
-//        xmlHandler.verbConfig.setDisplayCount(Integer.parseInt(verbDisplayCount.getText().toString()));
-//
-//        xmlHandler.nounConfig.setResponseTime(Integer.parseInt(nounResponseTime.getText().toString()));
-//        xmlHandler.verbConfig.setResponseTime(Integer.parseInt(verbResponseTime.getText().toString()));
-//
-//        xmlHandler.nounConfig.setMode(getRadioGroupCheckedVal(findViewById(R.id.RadioGroupNounMode)));
-//        xmlHandler.verbConfig.setMode(getRadioGroupCheckedVal(findViewById(R.id.RadioGroupVerbMode)));
-//
-//        xmlHandler.nounConfig.setHintType(mapper.getHint(nounHintType.getSelectedItem().toString()));
-//        xmlHandler.verbConfig.setHintType(mapper.getHint(verbHintType.getSelectedItem().toString()));
 
         nounConfig.setDisplayCount(Integer.parseInt(nounDisplayCount.getSelectedItem().toString()));
         verbConfig.setDisplayCount(Integer.parseInt(verbDisplayCount.getSelectedItem().toString()));
@@ -142,24 +119,6 @@ public class GeneralSettingsActivity extends AppCompatActivity implements View.O
         Spinner verbLevel = (Spinner)findViewById(R.id.verbLevel);
         Spinner nounProportions = (Spinner)findViewById(R.id.nounProportions);
         Spinner verbProportions = (Spinner)findViewById(R.id.verbProportions);
-
-//        nounDisplayCount.setText("" + xmlHandler.nounConfig.getDisplayCount());
-//        verbDisplayCount.setText("" + xmlHandler.verbConfig.getDisplayCount());
-//        nounResponseTime.setText("" + xmlHandler.nounConfig.getResponseTime());
-//        verbResponseTime.setText("" + xmlHandler.verbConfig.getResponseTime());
-//
-//        if ("auto".equals(xmlHandler.nounConfig.getMode()))
-//            nounRg.check(findViewById(R.id.autoR).getId());
-//        else if ("therapist".equals(xmlHandler.nounConfig.getMode()))
-//            nounRg.check(findViewById(R.id.therapistR).getId());
-//
-//        if ("auto".equals(xmlHandler.verbConfig.getMode()))
-//            verbRg.check(findViewById(R.id.autoC).getId());
-//        else if ("therapist".equals(xmlHandler.verbConfig.getMode()))
-//            verbRg.check(findViewById(R.id.therapistC).getId());
-//
-//        nounHintType.setSelection(mapper.getHintId(xmlHandler.nounConfig.getHintType()));
-//        verbHintType.setSelection(mapper.getHintId(xmlHandler.verbConfig.getHintType()));
 
         nounDisplayCount.setSelection(mapper.getDisplayId(nounConfig.getDisplayCount()));
         verbDisplayCount.setSelection(mapper.getDisplayId(verbConfig.getDisplayCount()));

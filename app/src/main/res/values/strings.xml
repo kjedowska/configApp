@@ -43,4 +43,11 @@
     <string name="title_activity_add_category">AddCategory</string>
     <string name="add_category">Dodaj kategorię</string>
     <string name="add_audio">Dodaj audio</string>
+    <string name="status">Stan</string>
+    <string-array name="status_array">
+        <item>nauczone</item>
+        <item>uczone</item>
+        <item>do nauki</item>
+        <item>pominięte</item>
+    </string-array>
 </resources>

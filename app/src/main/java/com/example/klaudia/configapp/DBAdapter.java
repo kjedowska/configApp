@@ -12,6 +12,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
@@ -130,7 +131,7 @@ class DBAdapter {
     }
 
     public void openDB() {
-        db = SQLiteDatabase.openDatabase(DB_PATH + DB_NAME, null, SQLiteDatabase.OPEN_READONLY);
+        db = SQLiteDatabase.openDatabase(DB_PATH + DB_NAME, null, SQLiteDatabase.OPEN_READWRITE);
     }
 
     public void close() {
@@ -139,12 +140,12 @@ class DBAdapter {
 
     public List<Category> getCategories() {
         List<Category> categories = new LinkedList<Category>();
-        String columns[] = {"Nazwa", "Typ", "Audio1", "Audio2"};
+        String columns[] = {"Nazwa", "Stan", "Audio1", "Audio2"};
         Cursor cursor = db.query("KATEGORIA", columns, null, null, null, null, null);
         while (cursor.moveToNext()) {
             Category cat = new Category();
             cat.setName(cursor.getString(0));
-            cat.setType(cursor.getString(1));
+            cat.setStatus(cursor.getString(1));
             cat.setAudio1(cursor.getString(2));
             cat.setAudio2(cursor.getString(3));
             categories.add(cat);
@@ -155,7 +156,7 @@ class DBAdapter {
     public void addCategory(Category category) {
         ContentValues values = new ContentValues();
         values.put("nazwa", category.getName());
-        values.put("typ", category.getType());
+        values.put("stan", category.getStatus());
         values.put("audio1", category.getAudio1());
         values.put("audio2", category.getAudio2());
         db.insertOrThrow("KATEGORIA", null, values);
@@ -182,19 +183,5 @@ class DBAdapter {
             nodes.add(node);
         }
         return nodes;
-    }
-
-    public List<Category> getCategoriesFromType(String type) {
-        List<Category> categories = new LinkedList<Category>();
-        Cursor cursor = db.rawQuery("select nazwa, typ, audio1, audio2 from KATEGORIA where typ='" + type + "'", null);
-        while (cursor.moveToNext()) {
-            Category cat = new Category();
-            cat.setName(cursor.getString(0));
-            cat.setType(cursor.getString(1));
-            cat.setAudio1(cursor.getString(2));
-            cat.setAudio2(cursor.getString(3));
-            categories.add(cat);
-        }
-        return categories;
     }
 }

@@ -21,7 +21,6 @@ public class ResourcesActivity extends Activity implements View.OnClickListener 
     HashMap<String, List<String>> listDataChild;
 
     List<Category> nCategories;
-    List<Category> vCategories;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +48,7 @@ public class ResourcesActivity extends Activity implements View.OnClickListener 
 
         DBAdapter db = new DBAdapter(getApplicationContext());
         db.openDB();
-        nCategories = db.getCategoriesFromType("rzeczowniki");
+        nCategories = db.getCategories();
 
         for (Category c: nCategories) {
             listDataHeader.add(c.getName());
@@ -134,6 +133,7 @@ public class ResourcesActivity extends Activity implements View.OnClickListener 
 
     public boolean onAddBtnSelected() {
         Intent intent = new Intent(this, AddCategory.class);
+       // intent.putExtra("db", db);
         startActivity(intent);
         return true;
     }
