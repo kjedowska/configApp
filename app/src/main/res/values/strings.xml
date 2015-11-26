@@ -43,11 +43,21 @@
     <string name="title_activity_add_category">AddCategory</string>
     <string name="add_category">Dodaj kategorię</string>
     <string name="add_audio">Dodaj audio</string>
+    <string name="name">Nazwa</string>
     <string name="status">Stan</string>
     <string-array name="status_array">
         <item>nauczone</item>
         <item>uczone</item>
         <item>do nauki</item>
-        <item>pominięte</item>
+        <item>pominiete</item>
+    </string-array>
+    <string name="title_activity_add_child">AddChild</string>
+    <string name="add_child">Dodaj obraz</string>
+    <string name="add_image">Dodaj grafikę</string>
+    <string name="set">Zbiór</string>
+    <string-array name="set_array">
+        <item>uczacy</item>
+        <item>generalizacji</item>
+        <item>brak</item>
     </string-array>
 </resources>

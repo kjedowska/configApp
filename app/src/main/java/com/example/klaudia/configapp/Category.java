@@ -1,7 +1,7 @@
 package com.example.klaudia.configapp;
 
+import java.io.Serializable;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by Klaudia on 2015-11-15.
@@ -11,7 +11,7 @@ public class Category {
     private String status = "";
     private String audio1 = "";
     private String audio2 = "";
-    private List<Node> nodes;
+    private List<Child> children;
 
     public String getAudio1() {
         return audio1;
@@ -45,19 +45,19 @@ public class Category {
         this.status = status;
     }
 
-    public List<Node> getNodes() {
-        return nodes;
+    public List<Child> getChildren() {
+        return children;
     }
 
-    public void setNodes(List<Node> nodes) {
-        this.nodes = nodes;
+    public void setChildren(List<Child> children) {
+        this.children = children;
     }
 
-    public void addNode(Node node) {
-        this.nodes.add(node);
+    public void addNode(Child child) {
+        this.children.add(child);
     }
 
-    public void removeNode(Node node) {
-        this.nodes.remove(node);
+    public void removeNode(Child child) {
+        this.children.remove(child);
     }
 }

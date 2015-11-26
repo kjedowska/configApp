@@ -3,9 +3,8 @@ package com.example.klaudia.configapp;
 /**
  * Created by Klaudia on 2015-11-15.
  */
-public class Node {
+public class Child {
     private int id;
-    private String name = "";
     private String set = "";
     private Category categoryObj;
     private String category = "";
@@ -17,14 +16,6 @@ public class Node {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getSet() {

@@ -19,7 +19,7 @@ public class ResourcesActivity extends Activity implements View.OnClickListener 
     ExpandableListView expListView;
     List<String> listDataHeader;
     HashMap<String, List<String>> listDataChild;
-
+    DBAdapter db;
     List<Category> nCategories;
 
     @Override
@@ -46,15 +46,15 @@ public class ResourcesActivity extends Activity implements View.OnClickListener 
         listDataHeader = new ArrayList<String>();
         listDataChild = new HashMap<String, List<String>>();
 
-        DBAdapter db = new DBAdapter(getApplicationContext());
+        db = new DBAdapter(getApplicationContext());
         db.openDB();
         nCategories = db.getCategories();
 
         for (Category c: nCategories) {
             listDataHeader.add(c.getName());
-            c.setNodes(db.getNodesFromCategory(c.getName()));
+            c.setChildren(db.getNodesFromCategory(c.getName()));
             ArrayList<String> listNodes = new ArrayList<String>();
-            for (Node n: c.getNodes()) {
+            for (Child n: c.getChildren()) {
                 listNodes.add(""+n.getId());
             }
             listDataChild.put(c.getName(), listNodes);
@@ -77,14 +77,15 @@ public class ResourcesActivity extends Activity implements View.OnClickListener 
 
          if (type == 1) {
              String child_name = listDataChild.get(group_name).get(child);
-             menu.setHeaderTitle(child_name);
-             menu.add(0, 0, 0, "Edit");
-             menu.add(0, 1, 0, "Delete");
+             menu.setHeaderTitle("Obraz " + group_name + child_name);
+             menu.add(0, 0, 0, "Edytuj");
+             menu.add(0, 1, 0, "Usuń");
          }
          else {
-             menu.setHeaderTitle(group_name);
-             menu.add(0, 0, 0, "Edit");
-             menu.add(0, 1, 0, "Delete");
+             menu.setHeaderTitle("Kategoria " + group_name);
+             menu.add(0, 0, 0, "Edytuj");
+             menu.add(0, 1, 0, "Usuń");
+             menu.add(0, 2, 0, "Dodaj obraz");
          }
     }
 
@@ -102,17 +103,35 @@ public class ResourcesActivity extends Activity implements View.OnClickListener 
 
         if (type == 1) {
             String child_name = listDataChild.get(group_name).get(child);
-            if(menuItem.getTitle()=="Edit"){function1(child_name + "edit");}
-            else if(menuItem.getTitle()=="Delete"){function2(child_name + "del");}
+            if (menuItem.getTitle()=="Edytuj"){function1(child_name + "edit");}
+            else if (menuItem.getTitle()=="Usuń"){deleteChild(child_name);}
             else {return false;}
             return true;
         }
         else {
-            if(menuItem.getTitle()=="Edit"){function1(group_name + " edit");}
-            else if(menuItem.getTitle()=="Delete"){function2(group_name + " del");}
+            if (menuItem.getTitle()=="Edytuj"){function1(group_name + " edit");}
+            else if (menuItem.getTitle()=="Usuń"){deleteCategory(group_name);}
+            else if (menuItem.getTitle()=="Dodaj obraz"){addChild(group_name);}
             else {return false;}
             return true;
         }
+    }
+
+    public void deleteCategory(String category){
+        db.deleteCategory(category);
+        Toast.makeText(this, "Usunięto kategorię "+category, Toast.LENGTH_SHORT).show();
+    }
+
+    public boolean addChild(String category) {
+        Intent intent = new Intent(this, AddChild.class);
+        intent.putExtra("category", category);
+        startActivity(intent);
+        return true;
+    }
+
+    public void deleteChild(String child){
+        db.deleteChild(child);
+        Toast.makeText(this, "Usunięto obraz o id = "+child, Toast.LENGTH_SHORT).show();
     }
 
     public void function1(String id){
@@ -133,7 +152,6 @@ public class ResourcesActivity extends Activity implements View.OnClickListener 
 
     public boolean onAddBtnSelected() {
         Intent intent = new Intent(this, AddCategory.class);
-       // intent.putExtra("db", db);
         startActivity(intent);
         return true;
     }

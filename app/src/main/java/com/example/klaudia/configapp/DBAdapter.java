@@ -6,13 +6,11 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
@@ -162,26 +160,35 @@ class DBAdapter {
         db.insertOrThrow("KATEGORIA", null, values);
     }
 
-    public void addNode(Node node) {
+    public void addChild(Child child) {
         ContentValues values = new ContentValues();
-        values.put("id", node.getId());
-        values.put("zbior", node.getSet());
-        values.put("kategoria", node.getCategory());
-        values.put("grafika", node.getImage());
+        values.put("zbior", child.getSet());
+        values.put("kategoria", child.getCategory());
+        values.put("grafika", child.getImage());
         db.insertOrThrow("OBRAZ", null, values);
     }
 
-    public List<Node> getNodesFromCategory(String category) {
-        List<Node> nodes = new LinkedList<Node>();
+    public List<Child> getNodesFromCategory(String category) {
+        List<Child> children = new LinkedList<Child>();
         Cursor cursor = db.rawQuery("select id, zbior, kategoria, grafika from OBRAZ where kategoria='" + category + "'", null);
         while (cursor.moveToNext()) {
-            Node node = new Node();
-            node.setId(cursor.getInt(0));
-            node.setSet(cursor.getString(1));
-            node.setCategory(cursor.getString(2));
-            node.setImage(cursor.getString(3));
-            nodes.add(node);
+            Child child = new Child();
+            child.setId(cursor.getInt(0));
+            child.setSet(cursor.getString(1));
+            child.setCategory(cursor.getString(2));
+            child.setImage(cursor.getString(3));
+            children.add(child);
         }
-        return nodes;
+        return children;
+    }
+
+    public void deleteCategory(String name) {
+        String[] columns = {name};
+        db.delete("KATEGORIA", "nazwa=?", columns);
+    }
+
+    public void deleteChild(String id) {
+        String[] columns = {id};
+        db.delete("OBRAZ", "id=?", columns);
     }
 }

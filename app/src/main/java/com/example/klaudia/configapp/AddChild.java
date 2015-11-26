@@ -16,21 +16,22 @@ import java.util.ArrayList;
 
 import br.com.thinkti.android.filechooser.FileChooser;
 
-public class AddCategory extends AppCompatActivity implements View.OnClickListener {
+public class AddChild extends AppCompatActivity implements View.OnClickListener {
 
-    private EditText chosenView;
+    String category;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_category);
+        setContentView(R.layout.activity_add_child);
 
-        fillSpinner(findViewById(R.id.statusSpinner), R.array.status_array);
+        Intent intent = getIntent();
+        category = intent.getExtras().getString("category");
 
-        View addAudio1Btn = findViewById(R.id.addAudioBtn);
-        addAudio1Btn.setOnClickListener(this);
-        View addAudio2Btn = findViewById(R.id.addAudio2Btn);
-        addAudio2Btn.setOnClickListener(this);
+        fillSpinner(findViewById(R.id.setSpinner), R.array.set_array);
+
+        View addImageBtn = findViewById(R.id.addImageBtn);
+        addImageBtn.setOnClickListener(this);
         View saveBtn = findViewById(R.id.saveBtn);
         saveBtn.setOnClickListener(this);
     }
@@ -38,34 +39,27 @@ public class AddCategory extends AppCompatActivity implements View.OnClickListen
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.addAudioBtn:
-                chosenView =  (EditText)findViewById(R.id.audio1Path);
-                onAddAudioBtnSelected();
-            case R.id.addAudio2Btn:
-                chosenView =  (EditText)findViewById(R.id.audio2Path);
-                onAddAudioBtnSelected();
+            case R.id.addImageBtn:
+                onAddImageBtnSelected();
             case R.id.saveBtn:
                 onAddSaveBtnSelected();
         }
     }
 
     public boolean onAddSaveBtnSelected(){
-        Category cat = new Category();
+        Child child = new Child();
         DBAdapter db = new DBAdapter(getApplicationContext());
         db.openDB();
 
-        EditText name = (EditText)findViewById(R.id.nameEditText);
-        Spinner status = (Spinner)findViewById(R.id.statusSpinner);
-        EditText audio1 = (EditText)findViewById(R.id.audio1Path);
-        EditText audio2 = (EditText)findViewById(R.id.audio2Path);
+        Spinner set = (Spinner)findViewById(R.id.setSpinner);
+        EditText image = (EditText)findViewById(R.id.imagePath);
 
-        cat.setName(name.getText().toString());
-        cat.setStatus(status.getSelectedItem().toString());
-        cat.setAudio1(audio1.getText().toString());
-        cat.setAudio2(audio2.getText().toString());
+        child.setCategory(category);
+        child.setSet(set.getSelectedItem().toString());
+        child.setImage(image.getText().toString());
 
-        db.addCategory(cat);
-        Toast.makeText(this, "Dodano kategorię " + name, Toast.LENGTH_SHORT).show();
+        db.addChild(child);
+        Toast.makeText(this, "Dodano dziecko do kategorii" + category, Toast.LENGTH_SHORT).show();
         return true;
     }
 
@@ -77,10 +71,14 @@ public class AddCategory extends AppCompatActivity implements View.OnClickListen
         spinner.setAdapter(adapter);
     }
 
-    public boolean onAddAudioBtnSelected() {
+    public boolean onAddImageBtnSelected() {
         Intent intent = new Intent(this, FileChooser.class);
         ArrayList<String> extensions = new ArrayList<String>();
-        extensions.add(".mp3");
+        extensions.add(".jpg");
+        extensions.add(".jpeg");
+        extensions.add(".gif");
+        extensions.add(".png");
+        extensions.add(".bmp");
         intent.putStringArrayListExtra("filterFileExtension", extensions);
         startActivityForResult(intent, 1);
         return true;
@@ -90,7 +88,8 @@ public class AddCategory extends AppCompatActivity implements View.OnClickListen
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if ((requestCode == 1) && (resultCode == -1)) {
             String fileSelected = data.getStringExtra("fileSelected");
-            chosenView.setText(fileSelected);
+            EditText v = (EditText)findViewById(R.id.imagePath);
+            v.setText(fileSelected);
             Toast.makeText(this, fileSelected, Toast.LENGTH_SHORT).show();
         }
     }
