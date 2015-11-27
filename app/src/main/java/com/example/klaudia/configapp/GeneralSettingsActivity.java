@@ -104,6 +104,8 @@ public class GeneralSettingsActivity extends AppCompatActivity implements View.O
 
         nounConfig.setLevel(nounLevel.getSelectedItem().toString());
         verbConfig.setLevel(verbLevel.getSelectedItem().toString());
+
+        nounConfig.setProportions(nounProportions.getSelectedItem().toString());
     }
 
     private void updateGUI() {

@@ -50,45 +50,33 @@ class DBAdapter {
             boolean dbExist = checkDataBase();
 
             if(dbExist)
-            {
-                //do nothing - database already exist
-            }else{
-
+            {}
+            else{
                 this.getWritableDatabase();
-
                 try {
-
                     copyDataBase();
-
                 } catch (IOException e) {
-
                     throw new Error("Error copying database");
-
                 }
             }
-
         }
 
         private boolean checkDataBase()
         {
             SQLiteDatabase checkDB = null;
-
             try
             {
                 String myPath = DB_PATH + DB_NAME;
                 checkDB = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY);
-
             }catch(SQLiteException e)
-            {
-                //database does't exist yet.
-            }
+            {}
             if(checkDB != null)
             {
                 checkDB.close();
             }
-
             return checkDB != null ? true : false;
         }
+
         private void copyDataBase() throws IOException
         {
             //Open your local db as the input stream
@@ -112,7 +100,6 @@ class DBAdapter {
             myOutput.close();
             myInput.close();
         }
-
 
         @Override
         public void onCreate(SQLiteDatabase db){
@@ -168,7 +155,7 @@ class DBAdapter {
         db.insertOrThrow("OBRAZ", null, values);
     }
 
-    public List<Child> getNodesFromCategory(String category) {
+    public List<Child> getChildrenFromCategory(String category) {
         List<Child> children = new LinkedList<Child>();
         Cursor cursor = db.rawQuery("select id, zbior, kategoria, grafika from OBRAZ where kategoria='" + category + "'", null);
         while (cursor.moveToNext()) {
@@ -182,6 +169,28 @@ class DBAdapter {
         return children;
     }
 
+    public Child getChild(String id) {
+        Child child = new Child();
+        Cursor cursor = db.rawQuery("select id, zbior, kategoria, grafika from OBRAZ where id='" + id + "'", null);
+        cursor.moveToNext();
+        child.setId(cursor.getInt(0));
+        child.setSet(cursor.getString(1));
+        child.setCategory(cursor.getString(2));
+        child.setImage(cursor.getString(3));
+        return child;
+    }
+
+    public Category getCategory(String category) {
+        Category cat = new Category();
+        Cursor cursor = db.rawQuery("select nazwa, stan, audio1, audio2 from KATEGORIA where nazwa='" + category + "'", null);
+        cursor.moveToNext();
+        cat.setName(cursor.getString(0));
+        cat.setStatus(cursor.getString(1));
+        cat.setAudio1(cursor.getString(2));
+        cat.setAudio2(cursor.getString(3));
+        return cat;
+    }
+
     public void deleteCategory(String name) {
         String[] columns = {name};
         db.delete("KATEGORIA", "nazwa=?", columns);
@@ -190,5 +199,23 @@ class DBAdapter {
     public void deleteChild(String id) {
         String[] columns = {id};
         db.delete("OBRAZ", "id=?", columns);
+    }
+
+    public void editCategory(Category category) {
+        ContentValues values = new ContentValues();
+        values.put("stan", category.getStatus());
+        values.put("audio1", category.getAudio1());
+        values.put("audio2", category.getAudio2());
+        String key[] = {category.getName()};
+        db.update("KATEGORIA", values, "nazwa=?", key);
+    }
+
+    public void editChild(Child child) {
+        ContentValues values = new ContentValues();
+        values.put("zbior", child.getSet());
+        values.put("kategoria", child.getCategory());
+        values.put("grafika", child.getImage());
+        String key[] = {""+child.getId()};
+        db.update("OBRAZ", values, "id=?", key);
     }
 }

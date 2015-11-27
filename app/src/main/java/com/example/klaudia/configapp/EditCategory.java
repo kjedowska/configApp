@@ -16,14 +16,18 @@ import java.util.ArrayList;
 
 import br.com.thinkti.android.filechooser.FileChooser;
 
-public class AddCategory extends AppCompatActivity implements View.OnClickListener {
-
+public class EditCategory extends AppCompatActivity implements View.OnClickListener {
     private EditText chosenView;
+    String category;
+    DBAdapter db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_category);
+        setContentView(R.layout.activity_edit_category);
+
+        Intent intent = getIntent();
+        category = intent.getExtras().getString("category");
 
         fillSpinner(findViewById(R.id.statusSpinner), R.array.status_array);
 
@@ -33,6 +37,23 @@ public class AddCategory extends AppCompatActivity implements View.OnClickListen
         addAudio2Btn.setOnClickListener(this);
         View saveBtn = findViewById(R.id.saveBtn);
         saveBtn.setOnClickListener(this);
+
+        db = new DBAdapter(getApplicationContext());
+        db.openDB();
+
+        fillFields();
+    }
+
+    public void fillFields(){
+        Mapper mapper = new Mapper();
+        Spinner status = (Spinner)findViewById(R.id.statusSpinner);
+        EditText audio1 = (EditText)findViewById(R.id.audio1Path);
+        EditText audio2 = (EditText)findViewById(R.id.audio2Path);
+
+        Category cat = db.getCategory(category);
+        status.setSelection(mapper.getStatusId(cat.getStatus()));
+        audio1.setText(cat.getAudio1());
+        audio2.setText(cat.getAudio2());
     }
 
     @Override
@@ -51,23 +72,20 @@ public class AddCategory extends AppCompatActivity implements View.OnClickListen
 
     public boolean onAddSaveBtnSelected(){
         Category cat = new Category();
-        DBAdapter db = new DBAdapter(getApplicationContext());
-        db.openDB();
 
-        EditText name = (EditText)findViewById(R.id.nameEditText);
         Spinner status = (Spinner)findViewById(R.id.statusSpinner);
         EditText audio1 = (EditText)findViewById(R.id.audio1Path);
         EditText audio2 = (EditText)findViewById(R.id.audio2Path);
 
-        cat.setName(name.getText().toString());
+        cat.setName(category);
         cat.setStatus(status.getSelectedItem().toString());
         cat.setAudio1(audio1.getText().toString());
         cat.setAudio2(audio2.getText().toString());
         try {
-            db.addCategory(cat);
-            Toast.makeText(this, "Dodano kategorię " + name.getText().toString(), Toast.LENGTH_SHORT).show();
+            db.editCategory(cat);
+            Toast.makeText(this, "Edytowano kategorię " + category, Toast.LENGTH_SHORT).show();
         } catch (Exception ex){
-            Toast.makeText(this, "Nie udało się dodać kategorii. Sprawdź czy nazwa jest prawidłowa", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Nie udało się edytować kategorii.", Toast.LENGTH_LONG).show();
         }
         return true;
     }
@@ -97,4 +115,5 @@ public class AddCategory extends AppCompatActivity implements View.OnClickListen
             Toast.makeText(this, fileSelected, Toast.LENGTH_SHORT).show();
         }
     }
+
 }

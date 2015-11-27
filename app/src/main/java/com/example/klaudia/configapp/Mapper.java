@@ -45,6 +45,21 @@ public class Mapper {
         proportionsIdMapper.put("0:1", 4);
     }
 
+    static final Map<String, Integer> setIdMapper = new HashMap<String, Integer>();
+    static {
+        setIdMapper.put("uczacy", 0);
+        setIdMapper.put("generalizacji", 1);
+        setIdMapper.put("brak", 2);
+    }
+
+    static final Map<String, Integer> statusIdMapper = new HashMap<String, Integer>();
+    static {
+        statusIdMapper.put("nauczone", 0);
+        statusIdMapper.put("uczone", 1);
+        statusIdMapper.put("do nauki", 2);
+        statusIdMapper.put("pominiete", 3);
+    }
+
     public Integer getHintId(String key) {
         if (hintIdMapper.containsKey(key))
             return hintIdMapper.get(key);
@@ -70,6 +85,18 @@ public class Mapper {
     public Integer getProportionsId(String key) {
         if (proportionsIdMapper.containsKey(key))
             return proportionsIdMapper.get(key);
+        return 0;
+    }
+
+    public Integer getSetId(String key) {
+        if (setIdMapper.containsKey(key))
+            return setIdMapper.get(key);
+        return 0;
+    }
+
+    public Integer getStatusId(String key) {
+        if (statusIdMapper.containsKey(key))
+            return statusIdMapper.get(key);
         return 0;
     }
 }

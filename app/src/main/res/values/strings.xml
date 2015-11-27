@@ -60,4 +60,8 @@
         <item>generalizacji</item>
         <item>brak</item>
     </string-array>
+    <string name="title_activity_edit_child">EditChild</string>
+    <string name="edit_child">Edytuj obraz</string>
+    <string name="title_activity_edit_category">EditCategory</string>
+    <string name="edit_category">Edytuj kategorię</string>
 </resources>

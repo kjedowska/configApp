@@ -54,6 +54,22 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.klaudia.configapp.ResourcesActivity" />
         </activity>
+        <activity
+            android:name=".EditChild"
+            android:label="@string/title_activity_edit_child"
+            android:parentActivityName=".ResourcesActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.klaudia.configapp.ResourcesActivity" />
+        </activity>
+        <activity
+            android:name=".EditCategory"
+            android:label="@string/title_activity_edit_category"
+            android:parentActivityName=".ResourcesActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.klaudia.configapp.ResourcesActivity" />
+        </activity>
     </application>
 
 </manifest>

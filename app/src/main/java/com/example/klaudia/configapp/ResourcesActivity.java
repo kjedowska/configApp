@@ -20,7 +20,7 @@ public class ResourcesActivity extends Activity implements View.OnClickListener 
     List<String> listDataHeader;
     HashMap<String, List<String>> listDataChild;
     DBAdapter db;
-    List<Category> nCategories;
+    List<Category> Categories;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,11 +48,11 @@ public class ResourcesActivity extends Activity implements View.OnClickListener 
 
         db = new DBAdapter(getApplicationContext());
         db.openDB();
-        nCategories = db.getCategories();
+        Categories = db.getCategories();
 
-        for (Category c: nCategories) {
+        for (Category c: Categories) {
             listDataHeader.add(c.getName());
-            c.setChildren(db.getNodesFromCategory(c.getName()));
+            c.setChildren(db.getChildrenFromCategory(c.getName()));
             ArrayList<String> listNodes = new ArrayList<String>();
             for (Child n: c.getChildren()) {
                 listNodes.add(""+n.getId());
@@ -103,13 +103,13 @@ public class ResourcesActivity extends Activity implements View.OnClickListener 
 
         if (type == 1) {
             String child_name = listDataChild.get(group_name).get(child);
-            if (menuItem.getTitle()=="Edytuj"){function1(child_name + "edit");}
+            if (menuItem.getTitle()=="Edytuj"){editChild(child_name, group_name);}
             else if (menuItem.getTitle()=="Usuń"){deleteChild(child_name);}
             else {return false;}
             return true;
         }
         else {
-            if (menuItem.getTitle()=="Edytuj"){function1(group_name + " edit");}
+            if (menuItem.getTitle()=="Edytuj"){editCategory(group_name);}
             else if (menuItem.getTitle()=="Usuń"){deleteCategory(group_name);}
             else if (menuItem.getTitle()=="Dodaj obraz"){addChild(group_name);}
             else {return false;}
@@ -134,12 +134,17 @@ public class ResourcesActivity extends Activity implements View.OnClickListener 
         Toast.makeText(this, "Usunięto obraz o id = "+child, Toast.LENGTH_SHORT).show();
     }
 
-    public void function1(String id){
-
-        Toast.makeText(this, "function 1 called "+id, Toast.LENGTH_SHORT).show();
+    public void editChild(String child, String category){
+        Intent intent = new Intent(this, EditChild.class);
+        intent.putExtra("category", category);
+        intent.putExtra("id", child);
+        startActivity(intent);
     }
-    public void function2(String id){
-        Toast.makeText(this, "function 2 called "+id, Toast.LENGTH_SHORT).show();
+
+    public void editCategory(String category){
+        Intent intent = new Intent(this, EditCategory.class);
+        intent.putExtra("category", category);
+        startActivity(intent);
     }
 
     @Override
