@@ -1,14 +1,24 @@
 package com.example.klaudia.configapp;
 
 import android.app.Activity;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.ExpandableListView;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -27,14 +37,12 @@ public class ResourcesActivity extends Activity implements View.OnClickListener 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resources);
 
-        // get the listview
         expListView = (ExpandableListView) findViewById(R.id.list1);
 
         initDB();
 
         listAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild);
 
-        // setting list adapter
         expListView.setAdapter(listAdapter);
         registerForContextMenu(expListView);
 
@@ -80,6 +88,7 @@ public class ResourcesActivity extends Activity implements View.OnClickListener 
              menu.setHeaderTitle("Obraz " + group_name + child_name);
              menu.add(0, 0, 0, "Edytuj");
              menu.add(0, 1, 0, "Usuń");
+             menu.add(0, 2, 0, "Podgląd");
          }
          else {
              menu.setHeaderTitle("Kategoria " + group_name);
@@ -105,6 +114,7 @@ public class ResourcesActivity extends Activity implements View.OnClickListener 
             String child_name = listDataChild.get(group_name).get(child);
             if (menuItem.getTitle()=="Edytuj"){editChild(child_name, group_name);}
             else if (menuItem.getTitle()=="Usuń"){deleteChild(child_name);}
+            else if (menuItem.getTitle()=="Podgląd"){viewImage(child_name);}
             else {return false;}
             return true;
         }
@@ -145,6 +155,36 @@ public class ResourcesActivity extends Activity implements View.OnClickListener 
         Intent intent = new Intent(this, EditCategory.class);
         intent.putExtra("category", category);
         startActivity(intent);
+    }
+
+    public void viewImage(String id){
+        Child child = db.getChild(id);
+        try {
+            showImage(Uri.parse(new File(child.getImage()).toString()));
+        } catch (Exception ex) {
+            Toast.makeText(this, "Nie można wyświetlić obrazu.", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    public void showImage(Uri imageUri) {
+        Dialog builder = new Dialog(this);
+        builder.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        builder.getWindow().setBackgroundDrawable(
+                new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialogInterface) {
+                //nothing;
+            }
+        });
+
+        ImageView imageView = new ImageView(this);
+        imageView.setImageURI(imageUri);
+        builder.addContentView(imageView, new RelativeLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT));
+        builder.show();
     }
 
     @Override

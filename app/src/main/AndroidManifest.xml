@@ -71,5 +71,5 @@
                 android:value="com.example.klaudia.configapp.ResourcesActivity" />
         </activity>
     </application>
-
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 </manifest>

@@ -1,64 +1,42 @@
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="fill_parent"
     android:layout_height="fill_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingRight="25dp"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:stretchColumns="*"
     android:background="#d8d2bc"
     tools:context="com.example.klaudia.configapp.GeneralSettingsActivity">
-    <TableRow android:layout_marginBottom="14dp">
-        <TextView android:text="@string/rzeczowniki"
-            android:layout_column="1"
+    <TableRow>
+        <TextView android:text="@string/ustawienia"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/abc_text_size_large_material" />
-        <TextView android:text="@string/czasowniki"
-            android:layout_column="3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/abc_text_size_large_material" />
+            android:textSize="@dimen/abc_text_size_large_material"
+            android:layout_span="3"
+            android:layout_gravity="center_horizontal"/>
     </TableRow>
     <TableRow android:layout_marginBottom="10dp">
         <TextView android:text="@string/mode"
             android:layout_column="0"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|right" />
         <RadioGroup
-            android:id="@+id/RadioGroupNounMode"
+            android:id="@+id/radioGroupMode"
             android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_span="2"
             android:layout_column="1"
-            android:checkedButton="@+id/autoR"
+            android:checkedButton="@+id/auto"
             android:nestedScrollingEnabled="false">
             <RadioButton
-                android:id="@+id/autoR"
+                android:id="@+id/auto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/automatic"/>
             <RadioButton
-                android:id="@+id/therapistR"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/therapist"/>
-        </RadioGroup>
-        <RadioGroup
-            android:id="@+id/RadioGroupVerbMode"
-            android:orientation="horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_column="3"
-            android:layout_span="2"
-            android:checkedButton="@+id/autoC">
-            <RadioButton
-                android:id="@+id/autoC"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/automatic"/>
-            <RadioButton
-                android:id="@+id/therapistC"
+                android:id="@+id/therapist"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/therapist"/>
@@ -68,63 +46,52 @@
         <TextView android:text="@string/hintType"
             android:layout_column="0"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|right" />
         <Spinner
-            android:id="@+id/nounHintType"
+            android:id="@+id/hintType"
             android:layout_column="1"
-            android:layout_width="fill_parent"/>
-        <Spinner
-            android:id="@+id/verbHintType"
-            android:layout_column="3"
             android:layout_width="fill_parent"/>
     </TableRow>
     <TableRow android:layout_marginBottom="10dp">
         <TextView android:text="@string/displayCount"
             android:layout_column="0"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <Spinner android:id="@+id/nounDisplayCount"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|right" />
+        <Spinner android:id="@+id/displayCount"
             android:layout_column="1"
             android:layout_width="fill_parent" />
-        <Spinner android:id="@+id/verbDisplayCount"
-            android:layout_column="3"
-            android:layout_width="fill_parent"/>
     </TableRow>
     <TableRow android:layout_marginBottom="10dp">
         <TextView android:text="@string/level"
             android:layout_column="0"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <Spinner android:id="@+id/nounLevel"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|right" />
+        <Spinner android:id="@+id/level"
             android:layout_column="1"
             android:layout_width="fill_parent" />
-        <Spinner android:id="@+id/verbLevel"
-            android:layout_column="3"
-            android:layout_width="fill_parent"/>
     </TableRow>
     <TableRow android:layout_marginBottom="10dp">
         <TextView android:text="@string/proportions"
             android:layout_column="0"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <Spinner android:id="@+id/nounProportions"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|right" />
+        <Spinner android:id="@+id/proportions"
             android:layout_column="1"
             android:layout_width="fill_parent" />
-        <Spinner android:id="@+id/verbProportions"
-            android:layout_column="3"
-            android:layout_width="fill_parent"/>
     </TableRow>
     <TableRow android:layout_marginBottom="10dp">
         <TextView android:text="@string/responseTime"
             android:layout_column="0"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <EditText android:id="@+id/nounResponseTime"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|right" />
+        <EditText android:id="@+id/responseTime"
             android:layout_column="1"
             android:numeric="decimal" />
-        <EditText android:id="@+id/verbResponseTime"
-            android:layout_column="3"
-            android:numeric="decimal"/>
     </TableRow>
     <TableRow>
         <Button android:id="@+id/saveBtn"
