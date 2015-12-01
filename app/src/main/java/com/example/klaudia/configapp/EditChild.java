@@ -51,8 +51,10 @@ public class EditChild extends AppCompatActivity implements View.OnClickListener
         switch (v.getId()) {
             case R.id.addImageBtn:
                 onAddImageBtnSelected();
+                break;
             case R.id.saveBtn:
                 onAddSaveBtnSelected();
+                break;
         }
     }
 

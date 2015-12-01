@@ -41,8 +41,10 @@ public class AddChild extends AppCompatActivity implements View.OnClickListener 
         switch (v.getId()) {
             case R.id.addImageBtn:
                 onAddImageBtnSelected();
+                break;
             case R.id.saveBtn:
                 onAddSaveBtnSelected();
+                break;
         }
     }
 
@@ -59,7 +61,7 @@ public class AddChild extends AppCompatActivity implements View.OnClickListener 
         child.setImage(image.getText().toString());
 
         db.addChild(child);
-        Toast.makeText(this, "Dodano dziecko do kategorii" + category, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Dodano dziecko do kategorii " + category, Toast.LENGTH_SHORT).show();
         return true;
     }
 

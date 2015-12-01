@@ -41,11 +41,14 @@ public class AddCategory extends AppCompatActivity implements View.OnClickListen
             case R.id.addAudioBtn:
                 chosenView =  (EditText)findViewById(R.id.audio1Path);
                 onAddAudioBtnSelected();
+                break;
             case R.id.addAudio2Btn:
                 chosenView =  (EditText)findViewById(R.id.audio2Path);
                 onAddAudioBtnSelected();
+                break;
             case R.id.saveBtn:
                 onAddSaveBtnSelected();
+                break;
         }
     }
 

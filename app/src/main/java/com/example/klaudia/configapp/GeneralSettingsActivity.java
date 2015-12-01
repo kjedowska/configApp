@@ -15,8 +15,6 @@ public class GeneralSettingsActivity extends AppCompatActivity implements View.O
     private PreferencesManager preferencesManager;
     public Configuration config;
 
-    Mapper mapper = new Mapper();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +60,7 @@ public class GeneralSettingsActivity extends AppCompatActivity implements View.O
     }
 
     public void updateConfig() {
+        Mapper mapper = new Mapper();
         Spinner displayCount = (Spinner)findViewById(R.id.displayCount);
         EditText responseTime = (EditText)findViewById(R.id.responseTime);
         Spinner hintType = (Spinner)findViewById(R.id.hintType);
@@ -77,6 +76,7 @@ public class GeneralSettingsActivity extends AppCompatActivity implements View.O
     }
 
     private void updateGUI() {
+        Mapper mapper = new Mapper();
         Spinner displayCount = (Spinner)findViewById(R.id.displayCount);
         EditText responseTime = (EditText)findViewById(R.id.responseTime);
         RadioGroup rg = (RadioGroup)findViewById(R.id.radioGroupMode);

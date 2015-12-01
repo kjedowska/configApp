@@ -9,8 +9,8 @@
     <string name="therapist">terapeuty</string>
     <string name="displayCount">Ilosc wyswietlanych obrazków:</string>
     <string name="responseTime">Czas na odpowiedź użytkownika: </string>
-    <string name="action_settings">Settings</string>
-    <string name="title_activity_general_settings">GeneralSettingsActivity</string>
+    <string name="action_settings">Ustawienia</string>
+    <string name="title_activity_general_settings">Ustawienia ogólne</string>
     <string name="hintType">Typ podpowiedzi:</string>
     <string-array name="hint_array">
         <item>brak</item>
@@ -35,8 +35,8 @@
         <item>1:2</item>
         <item>0:1</item>
     </string-array>
-    <string name="title_activity_resources">ResourcesActivity</string>
-    <string name="title_activity_add_category">AddCategory</string>
+    <string name="title_activity_resources">Edytuj zasoby</string>
+    <string name="title_activity_add_category">Dodaj kategorię</string>
     <string name="add_category">Dodaj kategorię</string>
     <string name="add_audio">Dodaj audio</string>
     <string name="name">Nazwa</string>
@@ -47,7 +47,7 @@
         <item>do nauki</item>
         <item>pominiete</item>
     </string-array>
-    <string name="title_activity_add_child">AddChild</string>
+    <string name="title_activity_add_child">Dodaj obraz</string>
     <string name="add_child">Dodaj obraz</string>
     <string name="add_image">Dodaj grafikę</string>
     <string name="set">Zbiór</string>
@@ -56,9 +56,9 @@
         <item>generalizacji</item>
         <item>brak</item>
     </string-array>
-    <string name="title_activity_edit_child">EditChild</string>
+    <string name="title_activity_edit_child">Edytuj obraz</string>
     <string name="edit_child">Edytuj obraz</string>
-    <string name="title_activity_edit_category">EditCategory</string>
+    <string name="title_activity_edit_category">Edytuj kategorię</string>
     <string name="edit_category">Edytuj kategorię</string>
     <string name="ustawienia">Ustawienia</string>
 </resources>

@@ -3,8 +3,6 @@ package com.example.klaudia.configapp;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.util.Log;
 
 /**
  * Created by Klaudia on 2015-11-06.
@@ -32,11 +30,11 @@ public class PreferencesManager {
     }
 
     public void read() {
-        config.setMode(shared.getString("nMode", "auto"));
-        config.setHintType(shared.getString("nHintType", "fade"));
-        config.setDisplayCount(shared.getInt("nDisplayCount", 3));
-        config.setResponseTime(shared.getInt("nResponseTime", 5));
-        config.setLevel(shared.getString("nLevel", "poziom1"));
-        config.setProportions(shared.getString("nProportions", "1:0"));
+        config.setMode(shared.getString("mode", "auto"));
+        config.setHintType(shared.getString("hintType", "fade"));
+        config.setDisplayCount(shared.getInt("displayCount", 3));
+        config.setResponseTime(shared.getInt("responseTime", 5));
+        config.setLevel(shared.getString("level", "poziom1"));
+        config.setProportions(shared.getString("proportions", "1:0"));
     }
 }

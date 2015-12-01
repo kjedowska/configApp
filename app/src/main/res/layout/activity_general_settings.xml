@@ -7,15 +7,16 @@
     android:stretchColumns="*"
     android:background="#d8d2bc"
     tools:context="com.example.klaudia.configapp.GeneralSettingsActivity">
-    <TableRow>
+    <TableRow
+        android:layout_marginBottom="13dp">
         <TextView android:text="@string/ustawienia"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/abc_text_size_large_material"
             android:layout_span="3"
-            android:layout_gravity="center_horizontal"/>
+            android:layout_gravity="center_horizontal" />
     </TableRow>
-    <TableRow android:layout_marginBottom="10dp">
+    <TableRow android:layout_marginBottom="13dp">
         <TextView android:text="@string/mode"
             android:layout_column="0"
             android:layout_width="wrap_content"
@@ -42,7 +43,7 @@
                 android:text="@string/therapist"/>
         </RadioGroup>
     </TableRow>
-    <TableRow android:layout_marginBottom="10dp">
+    <TableRow android:layout_marginBottom="13dp">
         <TextView android:text="@string/hintType"
             android:layout_column="0"
             android:layout_width="wrap_content"
@@ -53,7 +54,7 @@
             android:layout_column="1"
             android:layout_width="fill_parent"/>
     </TableRow>
-    <TableRow android:layout_marginBottom="10dp">
+    <TableRow android:layout_marginBottom="13dp">
         <TextView android:text="@string/displayCount"
             android:layout_column="0"
             android:layout_width="wrap_content"
@@ -63,7 +64,7 @@
             android:layout_column="1"
             android:layout_width="fill_parent" />
     </TableRow>
-    <TableRow android:layout_marginBottom="10dp">
+    <TableRow android:layout_marginBottom="13dp">
         <TextView android:text="@string/level"
             android:layout_column="0"
             android:layout_width="wrap_content"
@@ -73,7 +74,7 @@
             android:layout_column="1"
             android:layout_width="fill_parent" />
     </TableRow>
-    <TableRow android:layout_marginBottom="10dp">
+    <TableRow android:layout_marginBottom="13dp">
         <TextView android:text="@string/proportions"
             android:layout_column="0"
             android:layout_width="wrap_content"
@@ -83,7 +84,7 @@
             android:layout_column="1"
             android:layout_width="fill_parent" />
     </TableRow>
-    <TableRow android:layout_marginBottom="10dp">
+    <TableRow android:layout_marginBottom="13dp">
         <TextView android:text="@string/responseTime"
             android:layout_column="0"
             android:layout_width="wrap_content"
@@ -95,6 +96,9 @@
     </TableRow>
     <TableRow>
         <Button android:id="@+id/saveBtn"
+            android:layout_gravity="center_horizontal"
+            android:width="175dp"
+            android:layout_span="3"
             android:text="@string/save"/>
     </TableRow>
 </TableLayout>
