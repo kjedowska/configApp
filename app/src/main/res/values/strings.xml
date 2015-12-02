@@ -61,4 +61,8 @@
     <string name="title_activity_edit_category">Edytuj kategorię</string>
     <string name="edit_category">Edytuj kategorię</string>
     <string name="ustawienia">Ustawienia</string>
+    <string name="title_activity_about">AboutActivity</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="about">About</string>
 </resources>

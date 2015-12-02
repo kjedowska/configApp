@@ -17,9 +17,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         View generalSettingsBtn = findViewById(R.id.generalBtn);
         View resBtn = findViewById(R.id.resBtn);
+        View aboutBtn = findViewById(R.id.aboutBtn);
 
         generalSettingsBtn.setOnClickListener(this);
         resBtn.setOnClickListener(this);
+        aboutBtn.setOnClickListener(this);
     }
 
 
@@ -32,6 +34,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.resBtn:
                 onResBtnSelected();
                 break;
+            case R.id.aboutBtn:
+                onAboutBtnSelected();
+                break;
         }
     }
 
@@ -43,6 +48,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public boolean onResBtnSelected() {
         Intent intent = new Intent(this, ResourcesActivity.class);
+        startActivity(intent);
+        return true;
+    }
+
+    public boolean onAboutBtnSelected() {
+        Intent intent = new Intent(this, AboutActivity.class);
         startActivity(intent);
         return true;
     }
