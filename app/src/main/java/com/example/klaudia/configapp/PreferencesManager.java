@@ -13,7 +13,7 @@ public class PreferencesManager {
     public Configuration config;
 
     PreferencesManager(Activity activity, Configuration config) {
-        shared = activity.getSharedPreferences("sharedPref", Context.MODE_PRIVATE);
+        shared = activity.getSharedPreferences("sharedPref", Context.MODE_WORLD_READABLE);
         this.config = config;
     }
 
