@@ -25,6 +25,7 @@ public class PreferencesManager {
         editor.putInt("displayCount", config.getDisplayCount());
         editor.putString("level", config.getLevel());
         editor.putString("proportions", config.getProportions());
+        editor.putBoolean("generalization", config.isGeneralization());
 
         editor.commit();
     }
@@ -36,5 +37,6 @@ public class PreferencesManager {
         config.setResponseTime(shared.getInt("responseTime", 5));
         config.setLevel(shared.getString("level", "poziom1"));
         config.setProportions(shared.getString("proportions", "1:0"));
+        config.setGeneralization(shared.getBoolean("generalization", false));
     }
 }
