@@ -23,8 +23,8 @@ public class Mapper {
     static final Map<String, String> hintTypeMapper = new HashMap<String, String>();
     static {
         hintTypeMapper.put("brak", "none");
-        hintTypeMapper.put("wygaszanie", "border");
-        hintTypeMapper.put("pogrubienie", "fade");
+        hintTypeMapper.put("wygaszanie", "fade");
+        hintTypeMapper.put("pogrubienie", "border");
     }
 
     static final Map<String, Integer> hintIdMapper = new HashMap<String, Integer>();
@@ -42,11 +42,18 @@ public class Mapper {
         displayIdMapper.put(6, 3);
     }
 
+    static final Map<String, String> levelTypeMapper = new HashMap<String, String>();
+    static {
+        levelTypeMapper.put("poziom1", "level1");
+        levelTypeMapper.put("poziom2", "level2");
+        levelTypeMapper.put("poziom3", "level3");
+    }
+
     static final Map<String, Integer> levelIdMapper = new HashMap<String, Integer>();
     static {
-        levelIdMapper.put("poziom1", 0);
-        levelIdMapper.put("poziom2", 1);
-        levelIdMapper.put("poziom3", 2);
+        levelIdMapper.put("level1", 0);
+        levelIdMapper.put("level2", 1);
+        levelIdMapper.put("level3", 2);
     }
 
     static final Map<String, Integer> proportionsIdMapper = new HashMap<String, Integer>();
@@ -67,10 +74,10 @@ public class Mapper {
 
     static final Map<String, Integer> statusIdMapper = new HashMap<String, Integer>();
     static {
-        statusIdMapper.put("nauczone", 0);
-        statusIdMapper.put("uczone", 1);
-        statusIdMapper.put("do nauki", 2);
-        statusIdMapper.put("pominiete", 3);
+        //statusIdMapper.put("nauczone", 0);
+        //statusIdMapper.put("uczone", 1);
+        statusIdMapper.put("do nauki", 0);
+        statusIdMapper.put("pominiete", 1);
     }
 
     public Integer getHintId(String key) {
@@ -88,6 +95,11 @@ public class Mapper {
             return displayIdMapper.get(key);
         return 0;
     }
+
+    public String getLevel(String key) {
+        return levelTypeMapper.get(key);
+    }
+
 
     public Integer getLevelId(String key) {
         if (levelIdMapper.containsKey(key))

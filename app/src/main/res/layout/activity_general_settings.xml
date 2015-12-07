@@ -94,11 +94,69 @@
             android:layout_column="1"
             android:numeric="decimal" />
     </TableRow>
+
+    <TableRow
+        android:layout_marginBottom="13dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:text="@string/automaticRepeats"
+            android:layout_column="0"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|right" />
+
+        <EditText
+            android:id="@+id/automaticRepeats"
+            android:layout_column="1"
+            android:numeric="decimal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </TableRow>
+
     <TableRow>
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Generalizacja"
+            android:id="@+id/generalization"
+            android:layout_column="1" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
         <Button android:id="@+id/saveBtn"
             android:layout_gravity="center_horizontal"
             android:width="175dp"
-            android:layout_span="3"
-            android:text="@string/save"/>
+            android:text="@string/save"
+            android:layout_column="1" />
     </TableRow>
 </TableLayout>

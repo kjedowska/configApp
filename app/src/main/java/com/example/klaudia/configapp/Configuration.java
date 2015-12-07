@@ -11,13 +11,18 @@ public class Configuration {
     private String mode = "";
     private int responseTime = 5;
     private String hintType = "";
-    private String level = "poziom1";
+    private String level = "level1";
     private String proportions = "1:0";
+    private boolean generalization = false;
     public String type = "";
+    private int automaticRepeats = 2;
 
-    Configuration() {}
+    Configuration() {
+    }
 
-    Configuration(String type) { this.type = type; }
+    Configuration(String type) {
+        this.type = type;
+    }
 
     public int getDisplayCount() {
         return displayCount;
@@ -65,5 +70,21 @@ public class Configuration {
 
     public void setProportions(String proportions) {
         this.proportions = proportions;
+    }
+
+    public boolean isGeneralization() {
+        return generalization;
+    }
+
+    public void setGeneralization(boolean generalization) {
+        this.generalization = generalization;
+    }
+
+    public int getAutomaticRepeats() {
+        return automaticRepeats;
+    }
+
+    public void setAutomaticRepeats(int automaticRepeats) {
+        this.automaticRepeats = automaticRepeats;
     }
 }

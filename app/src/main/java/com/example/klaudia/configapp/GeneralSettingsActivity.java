@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -68,13 +69,17 @@ public class GeneralSettingsActivity extends AppCompatActivity implements View.O
         Spinner hintType = (Spinner)findViewById(R.id.hintType);
         Spinner level = (Spinner)findViewById(R.id.level);
         Spinner proportions = (Spinner)findViewById(R.id.proportions);
+        CheckBox generalization = (CheckBox) findViewById(R.id.generalization);
+        EditText automaticRepeats = (EditText)findViewById(R.id.automaticRepeats);
 
         config.setDisplayCount(Integer.parseInt(displayCount.getSelectedItem().toString()));
         config.setResponseTime(Integer.parseInt(responseTime.getText().toString()));
         config.setMode(getRadioGroupCheckedVal(findViewById(R.id.radioGroupMode)));
         config.setHintType(mapper.getHint(hintType.getSelectedItem().toString()));
-        config.setLevel(level.getSelectedItem().toString());
+        config.setLevel(mapper.getLevel(level.getSelectedItem().toString()));
         config.setProportions(proportions.getSelectedItem().toString());
+        config.setGeneralization(generalization.isChecked());
+        config.setAutomaticRepeats(Integer.parseInt(automaticRepeats.getText().toString()));
     }
 
     private void updateGUI() {
@@ -85,9 +90,12 @@ public class GeneralSettingsActivity extends AppCompatActivity implements View.O
         Spinner hintType = (Spinner)findViewById(R.id.hintType);
         Spinner level = (Spinner)findViewById(R.id.level);
         Spinner proportions = (Spinner)findViewById(R.id.proportions);
+        CheckBox generalization = (CheckBox) findViewById(R.id.generalization);
+        EditText automaticRepeats = (EditText)findViewById(R.id.automaticRepeats);
 
         displayCount.setSelection(mapper.getDisplayId(config.getDisplayCount()));
         responseTime.setText("" + config.getResponseTime());
+        automaticRepeats.setText("" + config.getAutomaticRepeats());
 
         if ("auto".equals(config.getMode()))
             rg.check(findViewById(R.id.auto).getId());
@@ -97,6 +105,7 @@ public class GeneralSettingsActivity extends AppCompatActivity implements View.O
         hintType.setSelection(mapper.getHintId(config.getHintType()));
         level.setSelection(mapper.getLevelId(config.getLevel()));
         proportions.setSelection(mapper.getProportionsId(config.getProportions()));
+        generalization.setChecked(config.isGeneralization());
 
     }
 }
