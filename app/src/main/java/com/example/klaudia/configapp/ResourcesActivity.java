@@ -26,22 +26,20 @@ public class ResourcesActivity extends Activity implements View.OnClickListener 
 
     ExpandableListAdapter listAdapter;
     ExpandableListView expListView;
-    List<String> listDataHeader;
-    HashMap<String, List<String>> listDataChild;
+    List<String> listCategories;
+    HashMap<String, List<String>> listChildren;
     DBAdapter db;
-    List<Category> Categories;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resources);
 
-        expListView = (ExpandableListView) findViewById(R.id.list1);
-
         initDB();
+        fillLists();
 
-        listAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild);
-
+        listAdapter = new ExpandableListAdapter(this, listCategories, listChildren);
+        expListView = (ExpandableListView) findViewById(R.id.list1);
         expListView.setAdapter(listAdapter);
         registerForContextMenu(expListView);
 
@@ -50,23 +48,26 @@ public class ResourcesActivity extends Activity implements View.OnClickListener 
     }
 
     void initDB() {
-        listDataHeader = new ArrayList<String>();
-        listDataChild = new HashMap<String, List<String>>();
-
         db = new DBAdapter(getApplicationContext());
         db.openDB();
-        Categories = db.getCategories();
+    }
 
-        for (Category c: Categories) {
-            listDataHeader.add(c.getName());
+    void fillLists() {
+        List<Category> categories;
+        listCategories = new ArrayList<String>();
+        listChildren = new HashMap<String, List<String>>();
+
+        categories = db.getCategories();
+
+        for (Category c: categories) {
+            listCategories.add(c.getName());
             c.setChildren(db.getChildrenFromCategory(c.getName()));
             ArrayList<String> listNodes = new ArrayList<String>();
             for (Child n: c.getChildren()) {
                 listNodes.add(""+n.getId());
             }
-            listDataChild.put(c.getName(), listNodes);
+            listChildren.put(c.getName(), listNodes);
         }
-
     }
 
      @Override
@@ -80,10 +81,10 @@ public class ResourcesActivity extends Activity implements View.OnClickListener 
                  ExpandableListView.getPackedPositionGroup(info.packedPosition);
          int child =
                  ExpandableListView.getPackedPositionChild(info.packedPosition);
-         String group_name = listDataHeader.get(group);
+         String group_name = listCategories.get(group);
 
          if (type == 1) {
-             String child_name = listDataChild.get(group_name).get(child);
+             String child_name = listChildren.get(group_name).get(child);
              menu.setHeaderTitle("Obraz " + group_name + child_name);
              menu.add(0, 0, 0, "Edytuj");
              menu.add(0, 1, 0, "Usuń");
@@ -107,10 +108,10 @@ public class ResourcesActivity extends Activity implements View.OnClickListener 
                 ExpandableListView.getPackedPositionGroup(info.packedPosition);
         int child =
                 ExpandableListView.getPackedPositionChild(info.packedPosition);
-        String group_name = listDataHeader.get(group);
+        String group_name = listCategories.get(group);
 
         if (type == 1) {
-            String child_name = listDataChild.get(group_name).get(child);
+            String child_name = listChildren.get(group_name).get(child);
             if (menuItem.getTitle()=="Edytuj"){editChild(child_name, group_name);}
             else if (menuItem.getTitle()=="Usuń"){deleteChild(child_name);}
             else if (menuItem.getTitle()=="Podgląd"){viewImage(child_name);}

@@ -10,6 +10,8 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 
+import java.util.Map;
+
 public class GeneralSettingsActivity extends AppCompatActivity implements View.OnClickListener {
 
     private PreferencesManager preferencesManager;
@@ -60,7 +62,7 @@ public class GeneralSettingsActivity extends AppCompatActivity implements View.O
     }
 
     public void updateConfig() {
-        Mapper mapper = new Mapper();
+        Mapper mapper = Mapper.getInstance();
         Spinner displayCount = (Spinner)findViewById(R.id.displayCount);
         EditText responseTime = (EditText)findViewById(R.id.responseTime);
         Spinner hintType = (Spinner)findViewById(R.id.hintType);
@@ -76,7 +78,7 @@ public class GeneralSettingsActivity extends AppCompatActivity implements View.O
     }
 
     private void updateGUI() {
-        Mapper mapper = new Mapper();
+        Mapper mapper = Mapper.getInstance();
         Spinner displayCount = (Spinner)findViewById(R.id.displayCount);
         EditText responseTime = (EditText)findViewById(R.id.responseTime);
         RadioGroup rg = (RadioGroup)findViewById(R.id.radioGroupMode);

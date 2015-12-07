@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ConfigApp</string>
+    <string name="app_name">Przyjazne słowa Menedżer</string>
     <string name="any">any</string>
     <string name="mode">Tryb:</string>
     <string name="save">Zapisz</string>
@@ -61,7 +61,7 @@
     <string name="title_activity_edit_category">Edytuj kategorię</string>
     <string name="edit_category">Edytuj kategorię</string>
     <string name="ustawienia">Ustawienia</string>
-    <string name="title_activity_about">AboutActivity</string>
+    <string name="title_activity_about">O aplikacji</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="about">About</string>

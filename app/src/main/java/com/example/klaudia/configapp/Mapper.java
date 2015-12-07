@@ -7,6 +7,19 @@ import java.util.Map;
  * Created by Klaudia on 2015-11-04.
  */
 public class Mapper {
+
+    private static Mapper mInstance = null;
+
+    private Mapper(){}
+
+    public static Mapper getInstance(){
+        if(mInstance == null)
+        {
+            mInstance = new Mapper();
+        }
+        return mInstance;
+    }
+
     static final Map<String, String> hintTypeMapper = new HashMap<String, String>();
     static {
         hintTypeMapper.put("brak", "none");

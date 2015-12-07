@@ -49,9 +49,8 @@ class DBAdapter {
         {
             boolean dbExist = checkDataBase();
 
-            if(dbExist)
-            {}
-            else{
+            if(dbExist) {}
+            else {
                 this.getWritableDatabase();
                 try {
                     copyDataBase();
@@ -61,24 +60,20 @@ class DBAdapter {
             }
         }
 
-        private boolean checkDataBase()
-        {
+        private boolean checkDataBase(){
+
             SQLiteDatabase checkDB = null;
-            try
-            {
+            try {
                 String myPath = DB_PATH + DB_NAME;
                 checkDB = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY);
-            }catch(SQLiteException e)
-            {}
-            if(checkDB != null)
-            {
+            } catch(SQLiteException e){}
+            if (checkDB != null) {
                 checkDB.close();
             }
             return checkDB != null ? true : false;
         }
 
-        private void copyDataBase() throws IOException
-        {
+        private void copyDataBase() throws IOException {
             //Open your local db as the input stream
             InputStream myInput = context.getAssets().open(DB_NAME);
 
@@ -91,8 +86,7 @@ class DBAdapter {
             //transfer bytes from the inputfile to the outputfile
             byte[] buffer = new byte[1024];
             int length;
-            while ((length = myInput.read(buffer))>0)
-            {
+            while ((length = myInput.read(buffer))>0) {
                 myOutput.write(buffer, 0, length);
             }
             //Close the streams

@@ -45,7 +45,7 @@ public class EditCategory extends AppCompatActivity implements View.OnClickListe
     }
 
     public void fillFields(){
-        Mapper mapper = new Mapper();
+        Mapper mapper = Mapper.getInstance();
         Spinner status = (Spinner)findViewById(R.id.statusSpinner);
         EditText audio1 = (EditText)findViewById(R.id.audio1Path);
         EditText audio2 = (EditText)findViewById(R.id.audio2Path);

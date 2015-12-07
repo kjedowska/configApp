@@ -59,7 +59,7 @@ public class EditChild extends AppCompatActivity implements View.OnClickListener
     }
 
     public void fillFields(){
-        Mapper mapper = new Mapper();
+        Mapper mapper = Mapper.getInstance();
         Spinner set = (Spinner)findViewById(R.id.setSpinner);
         EditText image = (EditText)findViewById(R.id.imagePath);
 
