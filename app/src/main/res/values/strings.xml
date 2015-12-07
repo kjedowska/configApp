@@ -7,8 +7,9 @@
     <string name="proportions">Proporcje obraz/tekst: </string>
     <string name="automatic">auto</string>
     <string name="therapist">terapeuty</string>
-    <string name="displayCount">Ilosc wyswietlanych obrazków:</string>
+    <string name="displayCount">Ilosc wyswietlanych obrazków: </string>
     <string name="responseTime">Czas na odpowiedź użytkownika: </string>
+    <string name="automaticRepeats">Ilość poprawnych wskazań dla trybu automatycznego: </string>
     <string name="action_settings">Ustawienia</string>
     <string name="title_activity_general_settings">Ustawienia ogólne</string>
     <string name="hintType">Typ podpowiedzi:</string>

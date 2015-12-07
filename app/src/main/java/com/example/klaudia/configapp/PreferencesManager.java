@@ -26,7 +26,7 @@ public class PreferencesManager {
         editor.putString("level", config.getLevel());
         editor.putString("proportions", config.getProportions());
         editor.putBoolean("generalization", config.isGeneralization());
-
+        editor.putInt("automaticRepeats", config.getAutomaticRepeats());
         editor.commit();
     }
 
@@ -38,5 +38,6 @@ public class PreferencesManager {
         config.setLevel(shared.getString("level", "poziom1"));
         config.setProportions(shared.getString("proportions", "1:0"));
         config.setGeneralization(shared.getBoolean("generalization", false));
+        config.setAutomaticRepeats(shared.getInt("automaticRepeats",2));
     }
 }

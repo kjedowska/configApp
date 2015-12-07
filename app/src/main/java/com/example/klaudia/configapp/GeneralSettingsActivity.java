@@ -68,6 +68,7 @@ public class GeneralSettingsActivity extends AppCompatActivity implements View.O
         Spinner level = (Spinner)findViewById(R.id.level);
         Spinner proportions = (Spinner)findViewById(R.id.proportions);
         CheckBox generalization = (CheckBox) findViewById(R.id.generalization);
+        EditText automaticRepeats = (EditText)findViewById(R.id.automaticRepeats);
 
         config.setDisplayCount(Integer.parseInt(displayCount.getSelectedItem().toString()));
         config.setResponseTime(Integer.parseInt(responseTime.getText().toString()));
@@ -76,6 +77,7 @@ public class GeneralSettingsActivity extends AppCompatActivity implements View.O
         config.setLevel(mapper.getLevel(level.getSelectedItem().toString()));
         config.setProportions(proportions.getSelectedItem().toString());
         config.setGeneralization(generalization.isChecked());
+        config.setAutomaticRepeats(Integer.parseInt(automaticRepeats.getText().toString()));
     }
 
     private void updateGUI() {
@@ -87,9 +89,11 @@ public class GeneralSettingsActivity extends AppCompatActivity implements View.O
         Spinner level = (Spinner)findViewById(R.id.level);
         Spinner proportions = (Spinner)findViewById(R.id.proportions);
         CheckBox generalization = (CheckBox) findViewById(R.id.generalization);
+        EditText automaticRepeats = (EditText)findViewById(R.id.automaticRepeats);
 
         displayCount.setSelection(mapper.getDisplayId(config.getDisplayCount()));
         responseTime.setText("" + config.getResponseTime());
+        automaticRepeats.setText("" + config.getAutomaticRepeats());
 
         if ("auto".equals(config.getMode()))
             rg.check(findViewById(R.id.auto).getId());

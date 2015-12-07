@@ -15,6 +15,7 @@ public class Configuration {
     private String proportions = "1:0";
     private boolean generalization = false;
     public String type = "";
+    private int automaticRepeats = 2;
 
     Configuration() {
     }
@@ -77,5 +78,13 @@ public class Configuration {
 
     public void setGeneralization(boolean generalization) {
         this.generalization = generalization;
+    }
+
+    public int getAutomaticRepeats() {
+        return automaticRepeats;
+    }
+
+    public void setAutomaticRepeats(int automaticRepeats) {
+        this.automaticRepeats = automaticRepeats;
     }
 }
