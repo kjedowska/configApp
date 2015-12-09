@@ -112,16 +112,16 @@ public class ResourcesActivity extends Activity implements View.OnClickListener 
 
         if (type == 1) {
             String child_name = listChildren.get(group_name).get(child);
-            if (menuItem.getTitle()=="Edytuj"){editChild(child_name, group_name);}
-            else if (menuItem.getTitle()=="Usuń"){deleteChild(child_name);}
-            else if (menuItem.getTitle()=="Podgląd"){viewImage(child_name);}
-            else {return false;}
+            if (menuItem.getTitle()=="Edytuj"){ editChild(child_name, group_name); }
+            else if (menuItem.getTitle()=="Usuń"){ deleteChild(child_name); }
+            else if (menuItem.getTitle()=="Podgląd"){ viewImage(child_name); }
+            else { return false; }
             return true;
         }
         else {
-            if (menuItem.getTitle()=="Edytuj"){editCategory(group_name);}
-            else if (menuItem.getTitle()=="Usuń"){deleteCategory(group_name);}
-            else if (menuItem.getTitle()=="Dodaj obraz"){addChild(group_name);}
+            if (menuItem.getTitle()=="Edytuj"){ editCategory(group_name); }
+            else if (menuItem.getTitle()=="Usuń"){ deleteCategory(group_name); }
+            else if (menuItem.getTitle()=="Dodaj obraz"){ addChild(group_name); }
             else {return false;}
             return true;
         }
